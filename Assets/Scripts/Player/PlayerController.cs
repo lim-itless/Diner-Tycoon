@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _interactableLayer;
 
     private Vector2 _moveInput;
+    public IngredientType CurrentIngredientType { get; private set; }
+    public bool IsCarry { get; private set; }
 
     private void Awake()
     {
@@ -83,7 +85,30 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        interactable.Interact();
+        interactable.Interact(this);
+    }
+
+    public void CarryIngredient(IngredientType ingredientType)
+    {
+        if (IsCarry == true)
+        {
+            return;
+        }
+
+        CurrentIngredientType = ingredientType;
+        IsCarry = true;
+
+        PlayerView.SetCarry(true);
+
+        Debug.Log($"{ingredientType} 획득");
+    }
+
+    public void ClearIngredient()
+    {
+        CurrentIngredientType = IngredientType.None;
+        IsCarry = false;
+
+        PlayerView.SetCarry(false);
     }
 
     //private void Dance()

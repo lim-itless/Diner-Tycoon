@@ -2,8 +2,10 @@
 
 public class IngredientBox : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    [SerializeField] private IngredientType _ingredientType;
+
+    public void Interact(PlayerController playerController)
     {
-        Debug.Log("재료 상자 터치!");
+        playerController.CarryIngredient(_ingredientType);
     }
 }
