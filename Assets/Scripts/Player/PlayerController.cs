@@ -1,0 +1,102 @@
+﻿using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private PlayerView PlayerView;
+    [SerializeField] private Rigidbody2D PlayerRigidbody;
+
+    [SerializeField] private float _moveSpeed = 5f;
+    // [TODO] 대쉬를 넣으면 좋을 것 같음 (Shift)
+
+    [SerializeField] private float _interactRange = 1.5f;
+    [SerializeField] private LayerMask _interactableLayer;
+
+    private Vector2 _moveInput;
+
+    private void Awake()
+    {
+        PlayerRigidbody.gravityScale = 0f;
+        PlayerRigidbody.freezeRotation = true;
+    }
+
+    private void Update()
+    {
+        ReadMoveInput();
+        HandleInteractInput();
+        RefreshPlayerView();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+        //Dance();
+    }
+
+    private void ReadMoveInput()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        _moveInput = new Vector2(moveX, moveY).normalized;
+    }
+
+    private void RefreshPlayerView()
+    {
+        bool isMove = _moveInput != Vector2.zero;
+
+        PlayerView.SetMove(isMove);
+        PlayerView.Flip(_moveInput.x);
+    }
+
+    private void Move()
+    {
+        PlayerRigidbody.linearVelocity = _moveInput * _moveSpeed;
+    }
+
+    private void HandleInteractInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E) == false)
+        {
+            return;
+        }
+
+        TryInteract();
+    }
+
+    private void TryInteract()
+    {
+        Collider2D hitCollider = Physics2D.OverlapCircle(
+            transform.position,
+            _interactRange,
+            _interactableLayer
+        );
+
+        if (hitCollider == null)
+        {
+            return;
+        }
+
+        IInteractable interactable = hitCollider.GetComponent<IInteractable>();
+
+        if (interactable == null)
+        {
+            return;
+        }
+
+        interactable.Interact();
+    }
+
+    //private void Dance()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.O))
+    //    {
+    //        PlayerView.SetDance(true);
+    //        Invoke(nameof(EndDance), 0.5f);
+    //    }
+    //}
+
+    //private void EndDance()
+    //{
+    //    PlayerView.SetDance(false);
+    //}
+}
