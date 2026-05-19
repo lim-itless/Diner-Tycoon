@@ -4,6 +4,17 @@ public class Customer : MonoBehaviour, IInteractable
 {
     [SerializeField] private IngredientType _orderFoodType = IngredientType.ClamChowder;
     [SerializeField] private int _rewardScore = 100;
+    [SerializeField] private OrderBubbleUI OrderBubbleUI;
+
+    private void Start()
+    {
+        InitializeOrderBubble();
+    }
+
+    private void InitializeOrderBubble()
+    {
+        OrderBubbleUI.Initialize(this.transform,_orderFoodType.ToString());
+    }
 
     public void Interact(PlayerController playerController)
     {
@@ -15,7 +26,7 @@ public class Customer : MonoBehaviour, IInteractable
 
         if (playerController.CurrentIngredientType != _orderFoodType)
         {
-            Debug.Log($"잘못된 음식입니다. 주문: {_orderFoodType}, 보유: {playerController.CurrentIngredientType}");
+            Debug.Log($"잘못된 음식입니다. 주문 : {_orderFoodType}");
             return;
         }
 
@@ -26,7 +37,6 @@ public class Customer : MonoBehaviour, IInteractable
     {
         playerController.ClearIngredient();
 
-        Debug.Log($"{_orderFoodType} 서빙 성공!");
-        GameManager.Instance.AddScore(_rewardScore);
+        GameManager.Inst.AddScore(_rewardScore);
     }
 }

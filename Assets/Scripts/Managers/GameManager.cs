@@ -2,19 +2,19 @@
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Inst { get; private set; }
 
     public int Score { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Inst != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        Inst = this;
     }
 
     public void AddScore(int score)
