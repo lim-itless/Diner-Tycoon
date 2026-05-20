@@ -8,7 +8,6 @@ public class ResultUI : UIBase
     public void Open()
     {
         gameObject.SetActive(true);
-
         RefreshTodayScore();
     }
 

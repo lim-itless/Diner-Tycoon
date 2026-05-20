@@ -2,13 +2,28 @@
 
 public class Customer : MonoBehaviour, IInteractable
 {
-    [SerializeField] private IngredientType _orderFoodType = IngredientType.ClamChowder;
+    [SerializeField] private IngredientType _orderFoodType;
+    [SerializeField] private IngredientType[] _orderFoodTypes;
     [SerializeField] private int _rewardScore = 100;
     [SerializeField] private OrderBubbleUI OrderBubbleUI;
 
     private void Start()
     {
+        SetRandomOrder();
         InitializeOrderBubble();
+    }
+
+    private void SetRandomOrder()
+    {
+        if (_orderFoodTypes == null || _orderFoodTypes.Length == 0)
+        {
+            _orderFoodType = IngredientType.ClamChowder;
+            return;
+        }
+
+        int randomIndex = Random.Range(0, _orderFoodTypes.Length);
+
+        _orderFoodType = _orderFoodTypes[randomIndex];
     }
 
     private void InitializeOrderBubble()

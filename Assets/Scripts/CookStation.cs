@@ -41,24 +41,42 @@ public class CookStation : MonoBehaviour, IInteractable
     private void CheckRecipe()
     {
         bool hasClam = _ingredientList.Contains(IngredientType.Clam);
+
         bool hasPotato = _ingredientList.Contains(IngredientType.Potato);
+
         bool hasMilk = _ingredientList.Contains(IngredientType.Milk);
 
-        if (hasClam == false || hasPotato == false || hasMilk == false)
+        if (hasClam && hasPotato && hasMilk)
         {
+            CompleteFood(IngredientType.ClamChowder);
             return;
         }
 
-        CompleteFood(IngredientType.ClamChowder);
+        if (hasPotato && hasMilk)
+        {
+            CompleteFood(IngredientType.PotatoSoup);
+            return;
+        }
+
+        if (hasClam && hasPotato)
+        {
+            CompleteFood(IngredientType.PotatoMashInShell);
+            return;
+        }
     }
 
     private void CompleteFood(IngredientType foodType)
     {
         _completedFoodType = foodType;
 
-        _ingredientList.Clear();
-
         Debug.Log($"{foodType} 완성!");
+    }
+
+    private void RuinFood()
+    {
+        _completedFoodType = IngredientType.MessFood;
+
+        Debug.Log($"괴상한 음식 완성!");
     }
 
     private void TakeFood(PlayerController playerController)
@@ -72,13 +90,6 @@ public class CookStation : MonoBehaviour, IInteractable
         playerController.CarryIngredient(_completedFoodType);
 
         Debug.Log($"{_completedFoodType} 들기!");
-
-        _completedFoodType = IngredientType.None;
-    }
-
-    private void RuinFood()
-    {
-        Debug.Log($"괴상한 음식 완성!");
 
         _completedFoodType = IngredientType.None;
         _ingredientList.Clear();

@@ -5,5 +5,8 @@
     Potato,
     Milk,
 
-    ClamChowder
+    ClamChowder,
+    PotatoSoup,
+    PotatoMashInShell,
+    MessFood
 }
