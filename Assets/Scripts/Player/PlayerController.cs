@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _interactableLayer;
 
     private Vector2 _moveInput;
+    private Vector2 _lastMoveDirection = Vector2.down;
+    private float _lastHorizontalDirection = 1f;
     public IngredientType CurrentIngredientType { get; private set; }
     public bool IsCarry { get; private set; }
 
@@ -40,6 +42,16 @@ public class PlayerController : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         _moveInput = new Vector2(moveX, moveY).normalized;
+
+        if (_moveInput != Vector2.zero)
+        {
+            _lastMoveDirection = _moveInput;
+        }
+
+        if (moveX != 0)
+        {
+            _lastHorizontalDirection = moveX;
+        }
     }
 
     private void RefreshPlayerView()
@@ -47,7 +59,8 @@ public class PlayerController : MonoBehaviour
         bool isMove = _moveInput != Vector2.zero;
 
         PlayerView.SetMove(isMove);
-        PlayerView.Flip(_moveInput.x);
+        PlayerView.SetDirection(_lastMoveDirection);
+        PlayerView.Flip(_lastHorizontalDirection);
     }
 
     private void Move()
@@ -67,11 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryInteract()
     {
-        Collider2D hitCollider = Physics2D.OverlapCircle(
-            transform.position,
-            _interactRange,
-            _interactableLayer
-        );
+        Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, _interactRange,_interactableLayer);
 
         if (hitCollider == null)
         {

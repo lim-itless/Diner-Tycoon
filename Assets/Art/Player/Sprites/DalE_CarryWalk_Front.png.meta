@@ -1,0 +1,475 @@
+fileFormatVersion: 2
+guid: c7d7f4377a5f0d542a09a4cb3c073268
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1782770635037579914
+    second: DalE_CarryWalk_Front_0
+  - first:
+      213: -3927811840364910280
+    second: DalE_CarryWalk_Front_1
+  - first:
+      213: -1685121727928375658
+    second: DalE_CarryWalk_Front_2
+  - first:
+      213: 2238281616883099080
+    second: DalE_CarryWalk_Front_3
+  - first:
+      213: 3076534797905155514
+    second: DalE_CarryWalk_Front_4
+  - first:
+      213: -2511646229655249226
+    second: DalE_CarryWalk_Front_5
+  - first:
+      213: -98313678070222975
+    second: DalE_CarryWalk_Front_6
+  - first:
+      213: 4168910526288476756
+    second: DalE_CarryWalk_Front_7
+  - first:
+      213: -2809753228499654475
+    second: DalE_CarryWalk_Front_8
+  - first:
+      213: -3979632928817885317
+    second: DalE_CarryWalk_Front_9
+  - first:
+      213: -4105389998813895779
+    second: DalE_CarryWalk_Front_10
+  - first:
+      213: 8403148144277350992
+    second: DalE_CarryWalk_Front_11
+  - first:
+      213: -8770314210089104114
+    second: DalE_CarryWalk_Front_12
+  - first:
+      213: 7859985781713372502
+    second: DalE_CarryWalk_Front_13
+  - first:
+      213: -3506230593270718006
+    second: DalE_CarryWalk_Front_14
+  - first:
+      213: 5615512164854222115
+    second: DalE_CarryWalk_Front_15
+  - first:
+      213: 1759848654447722010
+    second: DalE_CarryWalk_Front_16
+  - first:
+      213: -6569066291407153997
+    second: DalE_CarryWalk_Front_17
+  - first:
+      213: 4660859475999150542
+    second: DalE_CarryWalk_Front_18
+  - first:
+      213: -4530941642829942984
+    second: DalE_CarryWalk_Front_19
+  - first:
+      213: -748244860636640214
+    second: DalE_CarryWalk_Front_20
+  - first:
+      213: 2656080359166183078
+    second: DalE_CarryWalk_Front_21
+  - first:
+      213: -8240403487980383595
+    second: DalE_CarryWalk_Front_22
+  - first:
+      213: -7802867025511455427
+    second: DalE_CarryWalk_Front_23
+  - first:
+      213: -8357259035250187905
+    second: DalE_CarryWalk_Front_24
+  - first:
+      213: 3963424199885910278
+    second: DalE_CarryWalk_Front_25
+  - first:
+      213: 4536469005112885226
+    second: DalE_CarryWalk_Front_26
+  - first:
+      213: 7726812339485505837
+    second: DalE_CarryWalk_Front_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 596
+        width: 181
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839e97e01fb9d79c0800000000000000
+      internalID: -3927811840364910280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 598
+        width: 199
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c5aa998549ff0f10800000000000000
+      internalID: 2238281616883099080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_5
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 594
+        width: 187
+        height: 294
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be13f7bf07d42dd0800000000000000
+      internalID: -2511646229655249226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_7
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 594
+        width: 181
+        height: 294
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45abfcb2902fad930800000000000000
+      internalID: 4168910526288476756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_9
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 594
+        width: 181
+        height: 294
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7fcc5dafe085c8c0800000000000000
+      internalID: -3979632928817885317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 166
+        width: 178
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65585aaac67441d60800000000000000
+      internalID: 7859985781713372502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_16
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 166
+        width: 181
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1e3ec2f60d3c6810800000000000000
+      internalID: 1759848654447722010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_19
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 166
+        width: 190
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83fa811f49cde11c0800000000000000
+      internalID: -4530941642829942984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_21
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 166
+        width: 181
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a60efe930b4cd420800000000000000
+      internalID: 2656080359166183078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_CarryWalk_Front_24
+      rect:
+        serializedVersion: 2
+        x: 1270
+        y: 166
+        width: 184
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f712df3af2d050c80800000000000000
+      internalID: -8357259035250187905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a55d36096b7580f499bd9a0c2066b624
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DalE_CarryWalk_Front_0: -1782770635037579914
+      DalE_CarryWalk_Front_1: -3927811840364910280
+      DalE_CarryWalk_Front_10: -4105389998813895779
+      DalE_CarryWalk_Front_11: 8403148144277350992
+      DalE_CarryWalk_Front_12: -8770314210089104114
+      DalE_CarryWalk_Front_13: 7859985781713372502
+      DalE_CarryWalk_Front_14: -3506230593270718006
+      DalE_CarryWalk_Front_15: 5615512164854222115
+      DalE_CarryWalk_Front_16: 1759848654447722010
+      DalE_CarryWalk_Front_17: -6569066291407153997
+      DalE_CarryWalk_Front_18: 4660859475999150542
+      DalE_CarryWalk_Front_19: -4530941642829942984
+      DalE_CarryWalk_Front_2: -1685121727928375658
+      DalE_CarryWalk_Front_20: -748244860636640214
+      DalE_CarryWalk_Front_21: 2656080359166183078
+      DalE_CarryWalk_Front_22: -8240403487980383595
+      DalE_CarryWalk_Front_23: -7802867025511455427
+      DalE_CarryWalk_Front_24: -8357259035250187905
+      DalE_CarryWalk_Front_25: 3963424199885910278
+      DalE_CarryWalk_Front_26: 4536469005112885226
+      DalE_CarryWalk_Front_27: 7726812339485505837
+      DalE_CarryWalk_Front_3: 2238281616883099080
+      DalE_CarryWalk_Front_4: 3076534797905155514
+      DalE_CarryWalk_Front_5: -2511646229655249226
+      DalE_CarryWalk_Front_6: -98313678070222975
+      DalE_CarryWalk_Front_7: 4168910526288476756
+      DalE_CarryWalk_Front_8: -2809753228499654475
+      DalE_CarryWalk_Front_9: -3979632928817885317
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
