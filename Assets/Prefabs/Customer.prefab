@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.72, y: 2.87, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,6 +50,7 @@ MonoBehaviour:
   _orderFoodTypes: 040000000500000006000000
   _rewardScore: 100
   _moveSpeed: 2
+  _waitTime: 10
   OrderBubblePrefab: {fileID: 7559122015951505510, guid: b7552c7f3af90cc40a17f086085ad2f0, type: 3}
 --- !u!212 &8888484460268064862
 SpriteRenderer:

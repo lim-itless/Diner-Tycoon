@@ -5,11 +5,13 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private float _gameTime = 60f;
     [SerializeField] private ResultUI ResultUI;
+    [SerializeField] private CustomerSpawner CustomerSpawner;
 
     public static GameManager Inst { get; private set; }
 
     public int Score { get; private set; }
     public float CurrentTime { get; private set; }
+    public bool IsGamePlaying { get; private set; }
     public bool IsGameEnd { get; private set; }
 
     private void Awake()
@@ -23,10 +25,10 @@ public class GameManager : MonoBehaviour
         Inst = this;
     }
 
-    private void Start()
-    {
-        StartGame();
-    }
+    //private void Start()
+    //{
+    //    StartGame();
+    //}
 
     private void Update()
     {
@@ -37,12 +39,20 @@ public class GameManager : MonoBehaviour
     {
         CurrentTime = _gameTime;
         IsGameEnd = false;
+        IsGamePlaying = true;
+
+        CustomerSpawner.BeginSpawnCustomers();
 
         Debug.Log("게임 시작!!");
     }
 
     private void HandleGameTimer()
     {
+        if (IsGamePlaying == false)
+        {
+            return;
+        }
+
         if (IsGameEnd == true)
         {
             return;
@@ -69,6 +79,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         IsGameEnd = true;
+        IsGamePlaying = false;
 
         ResultUI.Open();
 

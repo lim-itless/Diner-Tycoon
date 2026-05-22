@@ -29,9 +29,7 @@ public class OrderBubbleUI : UIBase
             return;
         }
 
-        Vector3 screenPosition = _mainCamera.WorldToScreenPoint(
-            _targetTransform.position + Vector3.up * 2f
-        );
+        Vector3 screenPosition = _mainCamera.WorldToScreenPoint(_targetTransform.position + Vector3.up * 1f);
 
         transform.position = screenPosition;
     }

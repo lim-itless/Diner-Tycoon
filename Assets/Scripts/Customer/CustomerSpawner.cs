@@ -1,29 +1,56 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject CustomerPrefab;
     [SerializeField] private Transform CustomerGroup;
     [SerializeField] private Transform EntranceSpot;
-    [SerializeField] private Transform[] QueueSpots;
+    [SerializeField] private Transform[] WaitSpots;
     [SerializeField] private Transform OrderBubble_Layout;
 
-    private void Start()
+    [SerializeField] private float _spawnTerm = 1f;
+
+    private Customer[] _customers;
+    private bool _isSpawning;
+
+    private void Awake()
     {
-        SpawnCustomers();
+        _customers = new Customer[WaitSpots.Length];
     }
 
-    private void SpawnCustomers()
+    public void BeginSpawnCustomers()
     {
-        for (int i = 0; i < QueueSpots.Length; i++)
+        if (_isSpawning == true)
         {
-            SpawnCustomer(QueueSpots[i]);
+            return;
         }
+
+        StartCoroutine(SpawnAllEmptyWaitSpotsCoroutine());
     }
 
-    private void SpawnCustomer(Transform queueSpot)
+    private IEnumerator SpawnAllEmptyWaitSpotsCoroutine()
     {
-        if (queueSpot == null)
+        _isSpawning = true;
+
+        for (int i = 0; i < WaitSpots.Length; i++)
+        {
+            if (_customers[i] != null)
+            {
+                continue;
+            }
+
+            SpawnCustomer(i);
+
+            yield return new WaitForSeconds(_spawnTerm);
+        }
+
+        _isSpawning = false;
+    }
+
+    private void SpawnCustomer(int queueIndex)
+    {
+        if (WaitSpots[queueIndex] == null)
         {
             return;
         }
@@ -36,17 +63,57 @@ public class CustomerSpawner : MonoBehaviour
         {
             return;
         }
-        
+
         customerObject.transform.SetParent(CustomerGroup);
 
         Customer customer = customerObject.GetComponent<Customer>();
 
-        if(customer == null)
+        if (customer == null)
         {
-            return; 
+            return;
         }
 
-        customer.Initialize(OrderBubble_Layout);
-        customer.MoveToQueueSpot(queueSpot.position);
+        _customers[queueIndex] = customer;
+
+        customer.Initialize(OrderBubble_Layout, WaitSpots[queueIndex].position, EntranceSpot.position, OnCustomerExitCompleted);
+    }
+
+    private void OnCustomerExitCompleted(Customer customer)
+    {
+        int emptyIndex = GetCustomerIndex(customer);
+
+        if (emptyIndex < 0)
+        {
+            return;
+        }
+
+        _customers[emptyIndex] = null;
+
+        StartCoroutine(SpawnEmptySpotAfterDelayCoroutine(emptyIndex));
+    }
+
+    private IEnumerator SpawnEmptySpotAfterDelayCoroutine(int queueIndex)
+    {
+        yield return new WaitForSeconds(_spawnTerm);
+
+        if (_customers[queueIndex] != null)
+        {
+            yield break;
+        }
+
+        SpawnCustomer(queueIndex);
+    }
+
+    private int GetCustomerIndex(Customer customer)
+    {
+        for (int i = 0; i < _customers.Length; i++)
+        {
+            if (_customers[i] == customer)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

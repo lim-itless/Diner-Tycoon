@@ -1,16 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected void BindOnClickButtonEvent(Button button, UnityAction action)
     {
-        
-    }
+        if (button == null)
+        {
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        button.onClick.RemoveListener(action);
+        button.onClick.AddListener(action);
     }
 }

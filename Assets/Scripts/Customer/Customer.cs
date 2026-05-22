@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Customer : MonoBehaviour, IInteractable
 {
@@ -6,14 +7,22 @@ public class Customer : MonoBehaviour, IInteractable
     [SerializeField] private IngredientType[] _orderFoodTypes;
     [SerializeField] private int _rewardScore = 100;
     [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float _waitTime = 10f;
 
     [SerializeField] private OrderBubbleUI OrderBubblePrefab;
     
     private Transform OrderBubble_Layout;
     private OrderBubbleUI _orderBubbleUI;
-    private Vector3 _targetPosition;
-    private bool _isMoving;
+
+    private Vector3 _waitPosition;
+    private Vector3 _exitPosition;
+
+    private bool _isMovingToWaitLine;
+    private bool _isMovingToExit;
     private bool _isReadyToOrder;
+    private float _currentWaitTime;
+
+    private Action<Customer> _onExitCompleted;
 
     private void Start()
     {
@@ -21,36 +30,93 @@ public class Customer : MonoBehaviour, IInteractable
     }
     private void Update()
     {
-        MoveToTarget();
+        MoveToWaitLine();
+        MoveToExit();
+        HandleWaitTimer();
     }
 
-    public void MoveToQueueSpot(Vector3 targetPosition)
+    public void Initialize(Transform orderBubbleLayout, Vector3 waitPosition, Vector3 exitPosition, Action<Customer> onExitCompleted)
     {
-        _targetPosition = targetPosition;
-        _isMoving = true;
+        OrderBubble_Layout = orderBubbleLayout;
+        _waitPosition = waitPosition;
+        _exitPosition = exitPosition;
+        _onExitCompleted = onExitCompleted;
+
+        _isMovingToWaitLine = true;
+        _isMovingToExit = false;
         _isReadyToOrder = false;
     }
 
-    private void MoveToTarget()
+    private void MoveToWaitLine()
     {
-        if (_isMoving == false)
+        if (_isMovingToWaitLine == false)
         {
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _waitPosition, _moveSpeed * Time.deltaTime);
 
-        float distance = Vector3.Distance(transform.position, _targetPosition);
-
+        float distance = Vector3.Distance(transform.position, _waitPosition);
         if (distance > 0.05f)
         {
             return;
         }
 
-        _isMoving = false;
+        _isMovingToWaitLine = false;
         _isReadyToOrder = true;
+        _currentWaitTime = _waitTime;
 
         InitializeOrderBubble();
+    }
+
+    private void MoveToExit()
+    {
+        if (_isMovingToExit == false)
+        { 
+            return ;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, _exitPosition, _moveSpeed * Time.deltaTime);
+
+        float distance = Vector3.Distance(transform.position, _exitPosition);
+        if (distance > 0.05f)
+        {
+            return;
+        }
+
+        _onExitCompleted?.Invoke(this);
+
+        Destroy(this.gameObject);
+
+    }
+
+    private void HandleWaitTimer()
+    { 
+        if(_isReadyToOrder ==  false)
+        {
+            return;
+        }
+
+        _currentWaitTime += Time.deltaTime;
+
+        if (_currentWaitTime > 0)
+        {
+            return;
+        }
+
+        StartExit();
+    }
+
+    private void StartExit()
+    {
+        _isMovingToWaitLine = false;
+        _isMovingToExit = true;
+        _isReadyToOrder = false;
+
+        if (_orderBubbleUI != null)
+        {
+            Destroy(_orderBubbleUI.gameObject);
+        }
     }
 
     private void SetRandomOrder()
@@ -61,14 +127,8 @@ public class Customer : MonoBehaviour, IInteractable
             return;
         }
 
-        int randomIndex = Random.Range(0, _orderFoodTypes.Length);
-
+        int randomIndex = UnityEngine.Random.Range(0, _orderFoodTypes.Length);
         _orderFoodType = _orderFoodTypes[randomIndex];
-    }
-
-    public void Initialize(Transform orderBubbleLayout)
-    {
-        OrderBubble_Layout = orderBubbleLayout;
     }
 
     private void InitializeOrderBubble()
@@ -79,9 +139,7 @@ public class Customer : MonoBehaviour, IInteractable
         }
 
         _orderBubbleUI = Instantiate(OrderBubblePrefab, OrderBubble_Layout);
-
         _orderBubbleUI.transform.localScale = Vector3.one;
-
         _orderBubbleUI.Initialize(this.transform, _orderFoodType.ToString());
     }
 
@@ -111,16 +169,10 @@ public class Customer : MonoBehaviour, IInteractable
     private void ServeFood(PlayerController playerController)
     {
         playerController.ClearIngredient();
-
         GameManager.Inst.AddScore(_rewardScore);
 
-        if (_orderBubbleUI != null)
-        {
-            Destroy(_orderBubbleUI.gameObject);
-        }
-
-        Destroy(gameObject);
-
         Debug.Log($"{_orderFoodType} 전달 완료");
+
+        StartExit();
     }
 }
