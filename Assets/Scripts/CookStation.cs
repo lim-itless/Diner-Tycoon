@@ -3,8 +3,35 @@ using UnityEngine;
 
 public class CookStation : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Transform FoodPoint;
+
+
     private readonly List<IngredientType> _ingredientList = new List<IngredientType>();
     private IngredientType _completedFoodType = IngredientType.None;
+    private GameObject _currentFoodObject;
+
+    private void RefreshFoodObject()
+    {
+        if (_currentFoodObject != null)
+        {
+            Destroy(_currentFoodObject);
+        }
+
+        if (_completedFoodType == IngredientType.None)
+        {
+            return;
+        }
+
+        GameObject foodPrefab = Resources.Load<GameObject>($"Prefabs/Food/Food_{_completedFoodType}");
+
+        if (foodPrefab == null)
+        {
+            Debug.LogWarning($"{_completedFoodType} 프리팹 없음");
+            return;
+        }
+
+        _currentFoodObject = Instantiate(foodPrefab, FoodPoint);
+    }
 
     public void Interact(PlayerController playerController)
     {
@@ -69,7 +96,7 @@ public class CookStation : MonoBehaviour, IInteractable
     {
         _completedFoodType = foodType;
 
-        Debug.Log($"{foodType} 완성!");
+        RefreshFoodObject();
     }
 
     private void RuinFood()
@@ -93,5 +120,22 @@ public class CookStation : MonoBehaviour, IInteractable
 
         _completedFoodType = IngredientType.None;
         _ingredientList.Clear();
+
+        RefreshFoodObject();
+    }
+
+    private Sprite GetFoodSprite(IngredientType foodType)
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Food/FoodSheet_0");
+
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i].name == foodType.ToString())
+            {
+                return sprites[i];
+            }
+        }
+
+        return null;
     }
 }

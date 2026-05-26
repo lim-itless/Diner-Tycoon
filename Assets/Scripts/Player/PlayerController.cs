@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _interactRange = 1.5f;
     [SerializeField] private LayerMask _interactableLayer;
+    [SerializeField] private Transform HoldSpot;
 
+    private GameObject _currentCarryObject;
     private Vector2 _moveInput;
     private Vector2 _lastMoveDirection = Vector2.down;
     private float _lastHorizontalDirection = 1f;
@@ -107,9 +109,8 @@ public class PlayerController : MonoBehaviour
         CurrentIngredientType = ingredientType;
         IsCarry = true;
 
+        CreateCarryObject(ingredientType);
         PlayerView.SetCarry(true);
-
-        Debug.Log($"{ingredientType} 획득");
     }
 
     public void ClearIngredient()
@@ -117,6 +118,7 @@ public class PlayerController : MonoBehaviour
         CurrentIngredientType = IngredientType.None;
         IsCarry = false;
 
+        ClearCarryObject();
         PlayerView.SetCarry(false);
     }
 
@@ -133,4 +135,35 @@ public class PlayerController : MonoBehaviour
     //{
     //    PlayerView.SetDance(false);
     //}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.orange;
+        Gizmos.DrawWireSphere(transform.position, _interactRange);
+    }
+        private void CreateCarryObject(IngredientType ingredientType)
+    {
+        ClearCarryObject();
+
+        GameObject carryPrefab = Resources.Load<GameObject>($"Prefabs/Food/Food_{ingredientType}");
+
+        if (carryPrefab == null)
+        {
+            return;
+        }
+
+        _currentCarryObject = Instantiate(carryPrefab, HoldSpot);
+    }
+
+    private void ClearCarryObject()
+    {
+        if (_currentCarryObject == null)
+        {
+            return;
+        }
+
+        Destroy(_currentCarryObject);
+        _currentCarryObject = null;
+    }
+
 }

@@ -10,6 +10,7 @@ public class Customer : MonoBehaviour, IInteractable
     [SerializeField] private float _waitTime = 10f;
 
     [SerializeField] private OrderBubbleUI OrderBubblePrefab;
+    [SerializeField] private WorldTextPopup ScorePopupPrefab;
     
     private Transform OrderBubble_Layout;
     private OrderBubbleUI _orderBubbleUI;
@@ -97,7 +98,12 @@ public class Customer : MonoBehaviour, IInteractable
             return;
         }
 
-        _currentWaitTime += Time.deltaTime;
+        _currentWaitTime -= Time.deltaTime;
+
+        if (_orderBubbleUI != null)
+        {
+            _orderBubbleUI.SetWaitGauge(_currentWaitTime / _waitTime);
+        }
 
         if (_currentWaitTime > 0)
         {
@@ -140,7 +146,7 @@ public class Customer : MonoBehaviour, IInteractable
 
         _orderBubbleUI = Instantiate(OrderBubblePrefab, OrderBubble_Layout);
         _orderBubbleUI.transform.localScale = Vector3.one;
-        _orderBubbleUI.Initialize(this.transform, _orderFoodType.ToString());
+        _orderBubbleUI.Initialize(this.transform, _orderFoodType);
     }
 
     public void Interact(PlayerController playerController)
@@ -170,9 +176,19 @@ public class Customer : MonoBehaviour, IInteractable
     {
         playerController.ClearIngredient();
         GameManager.Inst.AddScore(_rewardScore);
+        CreateScorePopup();
 
         Debug.Log($"{_orderFoodType} 전달 완료");
-
         StartExit();
+    }
+
+    private void CreateScorePopup()
+    {
+        if (ScorePopupPrefab == null)
+        {
+            return;
+        }
+        WorldTextPopup popup = Instantiate(ScorePopupPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+        popup.SetText($"+ {_rewardScore}");
     }
 }

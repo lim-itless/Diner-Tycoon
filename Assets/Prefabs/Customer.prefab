@@ -50,8 +50,9 @@ MonoBehaviour:
   _orderFoodTypes: 040000000500000006000000
   _rewardScore: 100
   _moveSpeed: 2
-  _waitTime: 10
+  _waitTime: 30
   OrderBubblePrefab: {fileID: 7559122015951505510, guid: b7552c7f3af90cc40a17f086085ad2f0, type: 3}
+  ScorePopupPrefab: {fileID: 3623434605490907812, guid: d18d135d8ea597247b63a3296818e2c3, type: 3}
 --- !u!212 &8888484460268064862
 SpriteRenderer:
   serializedVersion: 2
