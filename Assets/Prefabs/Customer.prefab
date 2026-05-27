@@ -53,6 +53,7 @@ MonoBehaviour:
   _waitTime: 30
   OrderBubblePrefab: {fileID: 7559122015951505510, guid: b7552c7f3af90cc40a17f086085ad2f0, type: 3}
   ScorePopupPrefab: {fileID: 3623434605490907812, guid: d18d135d8ea597247b63a3296818e2c3, type: 3}
+  _serveSuccessSFX: {fileID: 8300000, guid: 5359d30c691dc7c468b5285697e7c3e0, type: 3}
 --- !u!212 &8888484460268064862
 SpriteRenderer:
   serializedVersion: 2

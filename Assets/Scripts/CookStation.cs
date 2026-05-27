@@ -4,6 +4,7 @@ using UnityEngine;
 public class CookStation : MonoBehaviour, IInteractable
 {
     [SerializeField] private Transform FoodPoint;
+    [SerializeField] private AudioClip _completeCookSFX;
 
 
     private readonly List<IngredientType> _ingredientList = new List<IngredientType>();
@@ -95,7 +96,7 @@ public class CookStation : MonoBehaviour, IInteractable
     private void CompleteFood(IngredientType foodType)
     {
         _completedFoodType = foodType;
-
+        SoundManager.Inst.PlaySFX(_completeCookSFX);
         RefreshFoodObject();
     }
 

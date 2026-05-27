@@ -23,11 +23,13 @@ public class TitleUI : UIBase
         gameObject.SetActive(false);
         Object_MainHUD.SetActive(true);
 
+        SoundManager.Inst.PlayButtonClickSFX();
         GameManager.Inst.StartGame();
     }
 
     private void OnClickQuitButton()
     {
+        SoundManager.Inst.PlayButtonClickSFX();
         Application.Quit();
     }
 }

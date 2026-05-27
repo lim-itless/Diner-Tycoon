@@ -11,7 +11,9 @@ public class Customer : MonoBehaviour, IInteractable
 
     [SerializeField] private OrderBubbleUI OrderBubblePrefab;
     [SerializeField] private WorldTextPopup ScorePopupPrefab;
-    
+
+    [SerializeField] private AudioClip _serveSuccessSFX;
+
     private Transform OrderBubble_Layout;
     private OrderBubbleUI _orderBubbleUI;
 
@@ -176,7 +178,9 @@ public class Customer : MonoBehaviour, IInteractable
     {
         playerController.ClearIngredient();
         GameManager.Inst.AddScore(_rewardScore);
+
         CreateScorePopup();
+        SoundManager.Inst.PlaySFX(_serveSuccessSFX);
 
         Debug.Log($"{_orderFoodType} 전달 완료");
         StartExit();

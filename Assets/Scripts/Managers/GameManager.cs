@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        SoundManager.Inst.PlayMainBGM();
+
         CurrentTime = _gameTime;
         IsGameEnd = false;
         IsGamePlaying = true;
 
         CustomerSpawner.BeginSpawnCustomers();
-
-        Debug.Log("게임 시작!!");
     }
 
     private void HandleGameTimer()
