@@ -15954,6 +15954,10 @@ MonoBehaviour:
   - {fileID: 1895991174}
   OrderBubble_Layout: {fileID: 1707905826}
   _spawnTerm: 3
+  _customerIds:
+  - customer_normal
+  - customer_fast
+  - customer_vip
 --- !u!4 &1862443393
 Transform:
   m_ObjectHideFlags: 0

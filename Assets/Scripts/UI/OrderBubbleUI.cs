@@ -14,14 +14,16 @@ public class OrderBubbleUI : UIBase
     private Transform _targetTransform;
     private Camera _mainCamera;
 
-    public void Initialize(Transform targetTransform, IngredientType orderText)
+    public void Initialize(Transform targetTransform, IngredientType orderType)
     {
         _targetTransform = targetTransform;
-        Text_Order.text = $"{orderText} !";
 
-        RefreshOrderIcon(orderText);
+        Text_Order.text = string.Empty;
+
+        RefreshOrderIcon(orderType);
 
         _mainCamera = Camera.main;
+
         SetWaitGauge(1f);
     }
 
@@ -54,7 +56,7 @@ public class OrderBubbleUI : UIBase
             return;
         }
 
-        Sprite iconSprite = Resources.Load<Sprite>($"Icon/{orderType}");
+        Sprite iconSprite = ResourceManager.Inst.LoadSprite($"Icon/{orderType}");
 
         if (iconSprite == null)
         {
@@ -76,9 +78,7 @@ public class OrderBubbleUI : UIBase
             return;
         }
 
-        Vector3 screenPosition = _mainCamera.WorldToScreenPoint(
-            _targetTransform.position + Vector3.up * 2f
-        );
+        Vector3 screenPosition = _mainCamera.WorldToScreenPoint(_targetTransform.position + Vector3.up * 2f);
 
         transform.position = screenPosition;
     }

@@ -6,20 +6,38 @@ public class MainHUD : UIBase
     [SerializeField] private TMP_Text Text_Score;
     [SerializeField] private TMP_Text Text_Time;
 
-    private void Update()
+    private void OnEnable()
     {
-        RefreshScoreText();
-        RefreshTimeText();
+        if (GameManager.Inst == null)
+        {
+            return;
+        }
+
+        GameManager.Inst.OnScoreChanged += RefreshScoreText;
+        GameManager.Inst.OnTimeChanged += RefreshTimeText;
+
+        RefreshScoreText(GameManager.Inst.Score);
+        RefreshTimeText(Mathf.CeilToInt(GameManager.Inst.CurrentTime));
     }
 
-    private void RefreshScoreText()
+    private void OnDisable()
     {
-        Text_Score.text = $"Score : {GameManager.Inst.Score}";
-    }
-    private void RefreshTimeText()
-    {
-        int currentTime = Mathf.CeilToInt(GameManager.Inst.CurrentTime);
+        if (GameManager.Inst == null)
+        {
+            return;
+        }
 
+        GameManager.Inst.OnScoreChanged -= RefreshScoreText;
+        GameManager.Inst.OnTimeChanged -= RefreshTimeText;
+    }
+
+    private void RefreshScoreText(int score)
+    {
+        Text_Score.text = $"Score : {score}";
+    }
+
+    private void RefreshTimeText(int currentTime)
+    {
         Text_Time.text = $"{currentTime}";
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _gameTime = 60f;
     [SerializeField] private ResultUI ResultUI;
     [SerializeField] private CustomerSpawner CustomerSpawner;
+
+    public event Action<int> OnScoreChanged;
+    public event Action<int> OnTimeChanged;
+
+    private int _lastTime;
 
     public static GameManager Inst { get; private set; }
 
@@ -37,11 +43,17 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SoundManager.Inst.PlayMainBGM();
-
+        Score = 0;
         CurrentTime = _gameTime;
         IsGameEnd = false;
         IsGamePlaying = true;
+
+        _lastTime = Mathf.CeilToInt(CurrentTime);
+
+        OnScoreChanged?.Invoke(Score);
+        OnTimeChanged?.Invoke(_lastTime);
+
+        SoundManager.Inst.PlayMainBGM();
 
         CustomerSpawner.BeginSpawnCustomers();
     }
@@ -60,6 +72,14 @@ public class GameManager : MonoBehaviour
 
         CurrentTime -= Time.deltaTime;
 
+        int currentTime = Mathf.CeilToInt(CurrentTime);
+
+        if (_lastTime != currentTime)
+        {
+            _lastTime = currentTime;
+            OnTimeChanged?.Invoke(_lastTime);
+        }
+
         if (CurrentTime > 0)
         {
             return;
@@ -72,6 +92,8 @@ public class GameManager : MonoBehaviour
     public void AddScore(int score)
     {
         Score += score;
+
+        OnScoreChanged?.Invoke(Score);
 
         Debug.Log($"현재 점수 : {Score}");
     }

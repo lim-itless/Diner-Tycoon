@@ -57,6 +57,34 @@ public class GameObjectManager : MonoBehaviour
         Destroy(targetObject);
     }
 
+    public void RemoveObject(GameObject targetObject)
+    {
+        if (targetObject == null)
+        {
+            return;
+        }
+
+        int removeInstanceId = -1;
+
+        foreach (KeyValuePair<int, GameObject> pair in _objectDictionary)
+        {
+            if (pair.Value == targetObject)
+            {
+                removeInstanceId = pair.Key;
+                break;
+            }
+        }
+
+        if (removeInstanceId < 0)
+        {
+            Destroy(targetObject);
+            return;
+        }
+
+        _objectDictionary.Remove(removeInstanceId);
+        Destroy(targetObject);
+    }
+
     private int CreateInstanceId()
     {
         int instanceId = _nextInstanceId;

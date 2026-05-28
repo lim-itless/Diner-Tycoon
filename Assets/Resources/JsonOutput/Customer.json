@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "Customer_Normal_01",
+    "Name": "동네 손님",
+    "CustomerType": "Normal",
+    "WaitTime": 25,
+    "MoveSpeed": 2.5,
+    "RewardScore": 100
+  },
+  {
+    "Id": "Customer_Normal_02",
+    "Name": "배고픈 손님",
+    "CustomerType": "Normal",
+    "WaitTime": 22,
+    "MoveSpeed": 2.7,
+    "RewardScore": 120
+  },
+  {
+    "Id": "Customer_Fast_01",
+    "Name": "바쁜 직장인",
+    "CustomerType": "Fast",
+    "WaitTime": 14,
+    "MoveSpeed": 3.6,
+    "RewardScore": 150
+  },
+  {
+    "Id": "Customer_Fast_02",
+    "Name": "급한 배달원",
+    "CustomerType": "Fast",
+    "WaitTime": 12,
+    "MoveSpeed": 4,
+    "RewardScore": 170
+  },
+  {
+    "Id": "Customer_VIP_01",
+    "Name": "미식가 손님",
+    "CustomerType": "VIP",
+    "WaitTime": 35,
+    "MoveSpeed": 2.2,
+    "RewardScore": 300
+  },
+  {
+    "Id": "Customer_VIP_02",
+    "Name": "단골 VIP",
+    "CustomerType": "VIP",
+    "WaitTime": 40,
+    "MoveSpeed": 2,
+    "RewardScore": 350
+  }
+]

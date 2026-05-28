@@ -27,12 +27,23 @@ public class SoundManager : MonoBehaviour
         {
             return;
         }
+
+        if (AudioSource_SFX == null)
+        {
+            return;
+        }
+
         AudioSource_SFX.PlayOneShot(audioClip);
     }
 
     public void PlayBGM(AudioClip audioClip)
     {
         if (audioClip == null)
+        {
+            return;
+        }
+
+        if (AudioSource_BGM == null)
         {
             return;
         }

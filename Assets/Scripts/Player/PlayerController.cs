@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _lastMoveDirection = Vector2.down;
     private float _lastHorizontalDirection = 1f;
     public IngredientType CurrentIngredientType { get; private set; }
+    public PlayerState CurrentPlayerState { get; private set; }
     public bool IsCarry { get; private set; }
 
     private void Awake()
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         ReadMoveInput();
         HandleInteractInput();
+        RefreshPlayerState();
         RefreshPlayerView();
     }
 
@@ -56,20 +58,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RefreshPlayerView()
-    {
-        bool isMove = _moveInput != Vector2.zero;
-
-        PlayerView.SetMove(isMove);
-        PlayerView.SetDirection(_lastMoveDirection);
-        PlayerView.Flip(_lastHorizontalDirection);
-    }
-
-    private void Move()
-    {
-        PlayerRigidbody.linearVelocity = _moveInput * _moveSpeed;
-    }
-
     private void HandleInteractInput()
     {
         if (Input.GetKeyDown(KeyCode.E) == false)
@@ -78,6 +66,45 @@ public class PlayerController : MonoBehaviour
         }
 
         TryInteract();
+    }
+
+    private void RefreshPlayerState()
+    {
+        bool isMove = _moveInput != Vector2.zero;
+
+        if (IsCarry == true)
+        {
+            CurrentPlayerState = isMove == true
+                ? PlayerState.CarryMove
+                : PlayerState.CarryIdle;
+
+            return;
+        }
+
+        CurrentPlayerState = isMove == true
+            ? PlayerState.Move
+            : PlayerState.Idle;
+    }
+
+    private void RefreshPlayerView()
+    {
+        bool isMove =
+            CurrentPlayerState == PlayerState.Move ||
+            CurrentPlayerState == PlayerState.CarryMove;
+
+        bool isCarry =
+            CurrentPlayerState == PlayerState.CarryIdle ||
+            CurrentPlayerState == PlayerState.CarryMove;
+
+        PlayerView.SetMove(isMove);
+        PlayerView.SetCarry(isCarry);
+        PlayerView.SetDirection(_lastMoveDirection);
+        PlayerView.Flip(_lastHorizontalDirection);
+    }
+
+    private void Move()
+    {
+        PlayerRigidbody.linearVelocity = _moveInput * _moveSpeed;
     }
 
     private void TryInteract()
@@ -110,7 +137,6 @@ public class PlayerController : MonoBehaviour
         IsCarry = true;
 
         CreateCarryObject(ingredientType);
-        PlayerView.SetCarry(true);
     }
 
     public void ClearIngredient()
@@ -119,7 +145,6 @@ public class PlayerController : MonoBehaviour
         IsCarry = false;
 
         ClearCarryObject();
-        PlayerView.SetCarry(false);
     }
 
     //private void Dance()
@@ -141,18 +166,22 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.orange;
         Gizmos.DrawWireSphere(transform.position, _interactRange);
     }
-        private void CreateCarryObject(IngredientType ingredientType)
+
+    private void CreateCarryObject(IngredientType ingredientType)
     {
         ClearCarryObject();
 
-        GameObject carryPrefab = Resources.Load<GameObject>($"Prefabs/Food/Food_{ingredientType}");
+        GameObject carryPrefab =
+            ResourceManager.Inst.LoadPrefab($"Prefabs/Food/Food_{ingredientType}");
 
         if (carryPrefab == null)
         {
+            Debug.LogWarning($"Carry Prefab 없음 : Food_{ingredientType}");
             return;
         }
 
         _currentCarryObject = Instantiate(carryPrefab, HoldSpot);
+        _currentCarryObject.transform.localPosition = Vector3.zero;
     }
 
     private void ClearCarryObject()
@@ -165,5 +194,4 @@ public class PlayerController : MonoBehaviour
         Destroy(_currentCarryObject);
         _currentCarryObject = null;
     }
-
 }

@@ -23,7 +23,7 @@ public class CookStation : MonoBehaviour, IInteractable
             return;
         }
 
-        GameObject foodPrefab = Resources.Load<GameObject>($"Prefabs/Food/Food_{_completedFoodType}");
+        GameObject foodPrefab = ResourceManager.Inst.LoadPrefab($"Prefabs/Food/Food_{_completedFoodType}");
 
         if (foodPrefab == null)
         {
@@ -104,7 +104,9 @@ public class CookStation : MonoBehaviour, IInteractable
     {
         _completedFoodType = IngredientType.MessFood;
 
-        Debug.Log($"괴상한 음식 완성!");
+        RefreshFoodObject();
+
+        Debug.Log("괴상한 음식 완성!");
     }
 
     private void TakeFood(PlayerController playerController)
@@ -123,20 +125,5 @@ public class CookStation : MonoBehaviour, IInteractable
         _ingredientList.Clear();
 
         RefreshFoodObject();
-    }
-
-    private Sprite GetFoodSprite(IngredientType foodType)
-    {
-        Sprite[] sprites = Resources.LoadAll<Sprite>("Food/FoodSheet_0");
-
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            if (sprites[i].name == foodType.ToString())
-            {
-                return sprites[i];
-            }
-        }
-
-        return null;
     }
 }

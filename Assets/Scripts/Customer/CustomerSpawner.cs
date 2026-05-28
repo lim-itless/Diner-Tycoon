@@ -48,9 +48,16 @@ public class CustomerSpawner : MonoBehaviour
         _isSpawning = false;
     }
 
-    private void SpawnCustomer(int queueIndex)
+    private void SpawnCustomer(int waitIndex)
     {
-        if (WaitSpots[queueIndex] == null)
+        if (IsValidWaitIndex(waitIndex) == false)
+        {
+            return;
+        }
+
+        CustomerData customerData = GameDataManager.Inst.GetRandomCustomerData();
+
+        if (customerData == null)
         {
             return;
         }
@@ -73,9 +80,11 @@ public class CustomerSpawner : MonoBehaviour
             return;
         }
 
-        _customers[queueIndex] = customer;
+        customer.InitializeData(customerData);
 
-        customer.Initialize(OrderBubble_Layout, WaitSpots[queueIndex].position, EntranceSpot.position, OnCustomerExitCompleted);
+        _customers[waitIndex] = customer;
+
+        customer.Initialize(OrderBubble_Layout, WaitSpots[waitIndex].position, EntranceSpot.position, OnCustomerExitCompleted);
     }
 
     private void OnCustomerExitCompleted(Customer customer)
@@ -92,16 +101,36 @@ public class CustomerSpawner : MonoBehaviour
         StartCoroutine(SpawnEmptySpotAfterDelayCoroutine(emptyIndex));
     }
 
-    private IEnumerator SpawnEmptySpotAfterDelayCoroutine(int queueIndex)
+    private IEnumerator SpawnEmptySpotAfterDelayCoroutine(int waitIndex)
     {
         yield return new WaitForSeconds(_spawnTerm);
 
-        if (_customers[queueIndex] != null)
+        if (IsValidWaitIndex(waitIndex) == false)
         {
             yield break;
         }
 
-        SpawnCustomer(queueIndex);
+        if (_customers[waitIndex] != null)
+        {
+            yield break;
+        }
+
+        SpawnCustomer(waitIndex);
+    }
+
+    private bool IsValidWaitIndex(int waitIndex)
+    {
+        if (waitIndex < 0 || waitIndex >= WaitSpots.Length)
+        {
+            return false;
+        }
+
+        if (WaitSpots[waitIndex] == null)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private int GetCustomerIndex(Customer customer)

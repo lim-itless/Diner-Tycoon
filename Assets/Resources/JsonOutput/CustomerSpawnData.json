@@ -1,0 +1,26 @@
+[
+  {
+    "CustomerId": "Customer_Normal_01",
+    "Weight": "40"
+  },
+  {
+    "CustomerId": "Customer_Normal_02",
+    "Weight": "35"
+  },
+  {
+    "CustomerId": "Customer_Fast_01",
+    "Weight": "20"
+  },
+  {
+    "CustomerId": "Customer_Fast_02",
+    "Weight": "15"
+  },
+  {
+    "CustomerId": "Customer_VIP_01",
+    "Weight": "5"
+  },
+  {
+    "CustomerId": "Customer_VIP_02",
+    "Weight": "3"
+  }
+]
