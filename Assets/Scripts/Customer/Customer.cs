@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class Customer : MonoBehaviour, IInteractable
 {
@@ -9,6 +10,24 @@ public class Customer : MonoBehaviour, IInteractable
         WaitOrder,
         Exit
     }
+
+    public enum CustomerFaceState
+    {
+        Normal,
+        Bad,
+        Angry
+    }
+
+    public enum CustomerDirection
+    {
+        Front,
+        Side,
+        Back
+    }
+
+    [SerializeField] private SpriteRenderer BodyRenderer;
+    //[SerializeField] private SpriteRenderer FaceRenderer;
+    [SerializeField] private SpriteRenderer CustomerRenderer;
 
     [SerializeField] private IngredientType[] _orderFoodTypes;
 
@@ -32,6 +51,8 @@ public class Customer : MonoBehaviour, IInteractable
     private float _currentWaitTime;
 
     private CustomerState _customerState;
+    private CustomerFaceState _faceState;
+    private CustomerDirection _customerDirection;
 
     private Action<Customer> _onExitCompleted;
 
@@ -70,6 +91,11 @@ public class Customer : MonoBehaviour, IInteractable
                 _rewardScore *= 2;
                 break;
         }
+
+        _faceState = CustomerFaceState.Normal;
+        _customerDirection = CustomerDirection.Front;
+
+        RefreshView();
     }
 
     public void Initialize(Transform orderBubbleLayout, Vector3 waitPosition, Vector3 exitPosition, Action<Customer> onExitCompleted)
@@ -111,6 +137,11 @@ public class Customer : MonoBehaviour, IInteractable
         {
             return;
         }
+
+        Vector3 moveDirection = (_waitPosition - transform.position).normalized;
+
+        RefreshDirection(moveDirection);
+        RefreshView();
 
         transform.position = Vector3.MoveTowards(transform.position, _waitPosition, _moveSpeed * Time.deltaTime);
 
@@ -158,12 +189,14 @@ public class Customer : MonoBehaviour, IInteractable
         _currentWaitTime -= Time.deltaTime;
 
         RefreshWaitGauge();
+        RefreshFaceState();
 
         if (_currentWaitTime > 0)
         {
             return;
         }
 
+        GameManager.Inst.AddFailedCustomer();
         StartExit();
     }
 
@@ -232,9 +265,9 @@ public class Customer : MonoBehaviour, IInteractable
         playerController.ClearIngredient();
 
         GameManager.Inst.AddScore(_rewardScore);
-
         CreateScorePopup();
         SoundManager.Inst.PlaySFX(_serveSuccessSFX);
+        GameManager.Inst.AddCompletedOrder();
 
         StartExit();
     }
@@ -249,5 +282,133 @@ public class Customer : MonoBehaviour, IInteractable
         WorldTextPopup popup = Instantiate(ScorePopupPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
 
         popup.SetText($"+ {_rewardScore}");
+    }
+
+    private void RefreshFaceState()
+    {
+        if (_waitTime <= 0)
+        {
+            return;
+        }
+
+        float waitRatio =
+            _currentWaitTime / _waitTime;
+
+        if (waitRatio <= 0.3f)
+        {
+            ChangeFaceState(CustomerFaceState.Angry);
+            return;
+        }
+
+        if (waitRatio <= 0.6f)
+        {
+            ChangeFaceState(CustomerFaceState.Bad);
+            return;
+        }
+
+        ChangeFaceState(CustomerFaceState.Normal);
+    }
+
+    private void ChangeFaceState(CustomerFaceState faceState)
+    {
+        if (_faceState == faceState)
+        {
+            return;
+        }
+
+        _faceState = faceState;
+
+        RefreshView();
+    }
+
+    private void RefreshView()
+    {
+        if (CustomerRenderer == null)
+        {
+            return;
+        }
+
+        string spriteId = GetCurrentSpriteId();
+
+        if (string.IsNullOrEmpty(spriteId) == true)
+        {
+            return;
+        }
+
+        Sprite sprite = ResourceManager.Inst.LoadSprite(spriteId);
+
+        if (sprite == null)
+        {
+            return;
+        }
+
+        CustomerRenderer.sprite = sprite;
+    }
+
+    private string GetCurrentSpriteId()
+    {
+        if (_customerData == null)
+        {
+            return string.Empty;
+        }
+
+        if (_faceState == CustomerFaceState.Angry)
+        {
+            if (_customerDirection == CustomerDirection.Back)
+            {
+                return _customerData.AngryBackSpriteId;
+            }
+
+            if (_customerDirection == CustomerDirection.Side)
+            {
+                return _customerData.AngrySideSpriteId;
+            }
+
+            return _customerData.AngryFrontSpriteId;
+        }
+
+        if (_faceState == CustomerFaceState.Bad)
+        {
+            if (_customerDirection == CustomerDirection.Back)
+            {
+                return _customerData.BadBackSpriteId;
+            }
+
+            if (_customerDirection == CustomerDirection.Side)
+            {
+                return _customerData.BadSideSpriteId;
+            }
+
+            return _customerData.BadFrontSpriteId;
+        }
+
+        if (_customerDirection == CustomerDirection.Back)
+        {
+            return _customerData.NormalBackSpriteId;
+        }
+
+        if (_customerDirection == CustomerDirection.Side)
+        {
+            return _customerData.NormalSideSpriteId;
+        }
+
+        return _customerData.NormalFrontSpriteId;
+    }
+
+    private void RefreshDirection(Vector3 moveDirection)
+    {
+        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
+        {
+            _customerDirection = CustomerDirection.Side;
+            return;
+        }
+
+        if (moveDirection.y > 0)
+        {
+            _customerDirection = CustomerDirection.Back;
+            return;
+        }
+
+        _customerDirection = CustomerDirection.Front;
     }
 }

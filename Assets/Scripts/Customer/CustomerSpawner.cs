@@ -85,6 +85,8 @@ public class CustomerSpawner : MonoBehaviour
         _customers[waitIndex] = customer;
 
         customer.Initialize(OrderBubble_Layout, WaitSpots[waitIndex].position, EntranceSpot.position, OnCustomerExitCompleted);
+
+        GameManager.Inst.AddVisitCustomer();
     }
 
     private void OnCustomerExitCompleted(Customer customer)

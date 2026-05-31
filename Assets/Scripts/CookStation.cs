@@ -68,29 +68,14 @@ public class CookStation : MonoBehaviour, IInteractable
 
     private void CheckRecipe()
     {
-        bool hasClam = _ingredientList.Contains(IngredientType.Clam);
+        RecipeData recipeData = GameDataManager.Inst.GetRecipeData(_ingredientList);
 
-        bool hasPotato = _ingredientList.Contains(IngredientType.Potato);
-
-        bool hasMilk = _ingredientList.Contains(IngredientType.Milk);
-
-        if (hasClam && hasPotato && hasMilk)
+        if (recipeData == null)
         {
-            CompleteFood(IngredientType.ClamChowder);
             return;
         }
 
-        if (hasPotato && hasMilk)
-        {
-            CompleteFood(IngredientType.PotatoSoup);
-            return;
-        }
-
-        if (hasClam && hasPotato)
-        {
-            CompleteFood(IngredientType.PotatoMashInShell);
-            return;
-        }
+        CompleteFood(recipeData.GetResultFoodType());
     }
 
     private void CompleteFood(IngredientType foodType)

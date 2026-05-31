@@ -1,90 +1,94 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Inst { get; private set; }
 
-    private readonly Dictionary<string, CustomerData> _customerDataDictionary = new Dictionary<string, CustomerData>();
-
-    private readonly List<CustomerSpawnData> _customerSpawnDatas = new List<CustomerSpawnData>();
-
     private void Awake()
     {
-        if (Inst != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Inst = this;
 
-        LoadCustomerData();
+        _customerDataDictionary = LoadData<CustomerData>("Customer");
+        //_customerSpawnDataDictionary = LoadData<CustomerSpawnData>("CustomerSpawnData");
+        //_recipeDataDictionary = LoadData<RecipeData>("RecipeData");
+
         LoadCustomerSpawnData();
+        LoadRecipeData();
     }
 
-    private void LoadCustomerData()
+    [Serializable]
+    private class SerializationWrapper<T>
     {
-        TextAsset textAsset = Resources.Load<TextAsset>("JsonOutput/Customer");
+        public List<T> items;
+    }
+
+    private Dictionary<string, CustomerData> _customerDataDictionary = new Dictionary<string, CustomerData>();
+    //private Dictionary<string, RecipeData> _recipeDataDictionary = new Dictionary<string, RecipeData>();
+    //private Dictionary<string, CustomerSpawnData> _customerSpawnDataDictionary = new Dictionary<string, CustomerSpawnData>();
+    
+    private readonly List<CustomerSpawnData> _customerSpawnDatas = new List<CustomerSpawnData>();
+    private readonly List<RecipeData> _recipeDatas = new List<RecipeData>();
+
+    private Dictionary<string, T> LoadData<T>(string tableName) where T : GameDataBase
+    {
+        string resourcePath = $"JsonOutput/{tableName}";
+
+        TextAsset textAsset = Resources.Load<TextAsset>(resourcePath);
 
         if (textAsset == null)
         {
-            Debug.LogError("Customer Json을 찾을 수 없습니다.");
-            return;
+            Debug.LogError($"[Error] 리소스를 찾을 수 없습니다: Resources/{resourcePath}");
+            return new Dictionary<string, T>();
         }
 
-        string jsonText = "{\"CustomerDatas\":" + textAsset.text + "}";
-
-        CustomerDataList dataList = JsonUtility.FromJson<CustomerDataList>(jsonText);
-
-        if (dataList == null || dataList.CustomerDatas == null)
+        try
         {
-            Debug.LogError("Customer Json 파싱 실패");
-            return;
-        }
+            string jsonString = textAsset.text;
 
-        for (int i = 0; i < dataList.CustomerDatas.Count; i++)
+            string wrappedJson = "{\"items\":" + jsonString + "}";
+            SerializationWrapper<T> wrapper = JsonUtility.FromJson<SerializationWrapper<T>>(wrappedJson);
+
+            if (wrapper != null && wrapper.items != null)
+            {
+                Debug.Log($"{typeof(T).Name} 데이터를 {wrapper.items.Count}개 로드했습니다.");
+                return wrapper.items.ToDictionary(item => item.Id.ToString());
+            }
+        }
+        catch (Exception ex)
         {
-            CustomerData data = dataList.CustomerDatas[i];
-
-            if (data == null || string.IsNullOrEmpty(data.Id) == true)
-            {
-                continue;
-            }
-
-            if (_customerDataDictionary.ContainsKey(data.Id) == true)
-            {
-                Debug.LogWarning($"중복 Customer Id : {data.Id}");
-                continue;
-            }
-
-            _customerDataDictionary.Add(data.Id, data);
+            Debug.LogError($"[{typeof(T).Name} JSON 로드 오류] {ex.Message}");
         }
+
+        return new Dictionary<string, T>();
     }
 
     private void LoadCustomerSpawnData()
     {
-        TextAsset textAsset =
-            Resources.Load<TextAsset>("JsonOutput/CustomerSpawnData");
+        TextAsset textAsset = Resources.Load<TextAsset>("JsonOutput/CustomerSpawnData");
 
         if (textAsset == null)
         {
-            Debug.LogError("CustomerSpawnData Json을 찾을 수 없습니다.");
+            Debug.LogError("CustomerSpawnData 못 찾음");
             return;
         }
-
+        
         string jsonText = "{\"CustomerSpawnDatas\":" + textAsset.text + "}";
 
         CustomerSpawnDataList dataList = JsonUtility.FromJson<CustomerSpawnDataList>(jsonText);
 
         if (dataList == null || dataList.CustomerSpawnDatas == null)
         {
-            Debug.LogError("CustomerSpawnTable Json 파싱 실패");
+            Debug.LogError("CustomerSpawnData Json 파싱 실패");
             return;
         }
 
         _customerSpawnDatas.Clear();
         _customerSpawnDatas.AddRange(dataList.CustomerSpawnDatas);
+
+        Debug.Log($"CustomerSpawnData 로드 개수 : {_customerSpawnDatas.Count}");
     }
 
     public CustomerData GetCustomerData(string id)
@@ -104,6 +108,30 @@ public class GameDataManager : MonoBehaviour
         return _customerDataDictionary[id];
     }
 
+    private void LoadRecipeData()
+    {
+        TextAsset textAsset = Resources.Load<TextAsset>("JsonOutput/RecipeData");
+
+        if (textAsset == null)
+        {
+            Debug.LogError("RecipeData Json 못 찾음!");
+            return;
+        }
+
+        string jsonText = "{\"RecipeDatas\":" + textAsset.text + "}";
+
+        RecipeDataList dataList = JsonUtility.FromJson<RecipeDataList>(jsonText);
+
+        if (dataList == null || dataList.RecipeDatas == null)
+        {
+            Debug.LogError("RecipeData Json 파싱 실패");
+            return;
+        }
+
+        _recipeDatas.Clear();
+        _recipeDatas.AddRange(dataList.RecipeDatas);
+    }
+
     public CustomerData GetRandomCustomerData()
     {
         if (_customerSpawnDatas.Count == 0)
@@ -116,12 +144,14 @@ public class GameDataManager : MonoBehaviour
 
         for (int i = 0; i < _customerSpawnDatas.Count; i++)
         {
-            if (_customerSpawnDatas[i] == null)
+            CustomerSpawnData spawnData = _customerSpawnDatas[i];
+
+            if (spawnData == null)
             {
                 continue;
             }
 
-            totalWeight += _customerSpawnDatas[i].Weight;
+            totalWeight += spawnData.SpawnWeight;
         }
 
         if (totalWeight <= 0)
@@ -130,26 +160,76 @@ public class GameDataManager : MonoBehaviour
             return null;
         }
 
-        int randomValue = Random.Range(0, totalWeight);
+        int randomValue =
+            UnityEngine.Random.Range(0, totalWeight);
+
         int currentWeight = 0;
 
         for (int i = 0; i < _customerSpawnDatas.Count; i++)
         {
-            CustomerSpawnData spawnData = _customerSpawnDatas[i];
+            CustomerSpawnData spawnData =
+                _customerSpawnDatas[i];
 
             if (spawnData == null)
             {
                 continue;
             }
 
-            currentWeight += spawnData.Weight;
+            currentWeight += spawnData.SpawnWeight;
 
             if (randomValue < currentWeight)
             {
-                return GetCustomerData(spawnData.CustomerId);
+                return GetCustomerData(
+                    spawnData.CustomerId
+                );
             }
         }
 
         return null;
     }
-}
+
+    public RecipeData GetRecipeData(List<IngredientType> ingredients)
+    {
+        if (ingredients == null || ingredients.Count == 0)
+        {
+            return null;
+        }
+
+        for (int i = 0; i < _recipeDatas.Count; i++)
+        {
+            RecipeData recipeData = _recipeDatas[i];
+
+            if (IsSameRecipe(recipeData, ingredients) == true)
+            {
+                return recipeData;
+            }
+        }
+
+        return null;
+    }
+
+        private bool IsSameRecipe(RecipeData recipeData, List<IngredientType> ingredients)
+        {
+            if (recipeData == null || recipeData.Ingredients == null)
+            {
+                return false;
+            }
+
+            if (recipeData.Ingredients.Count != ingredients.Count)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                string ingredientName = ingredients[i].ToString();
+
+                if (recipeData.Ingredients.Contains(ingredientName) == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }

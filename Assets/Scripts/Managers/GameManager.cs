@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Inst { get; private set; }
 
+    public GameResultModel GameResultModel { get; private set; }
     public int Score { get; private set; }
     public float CurrentTime { get; private set; }
     public bool IsGamePlaying { get; private set; }
@@ -31,11 +32,6 @@ public class GameManager : MonoBehaviour
         Inst = this;
     }
 
-    //private void Start()
-    //{
-    //    StartGame();
-    //}
-
     private void Update()
     {
         HandleGameTimer();
@@ -43,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        ResetGameResult();
+
         Score = 0;
         CurrentTime = _gameTime;
         IsGameEnd = false;
@@ -103,8 +101,59 @@ public class GameManager : MonoBehaviour
         IsGameEnd = true;
         IsGamePlaying = false;
 
+        RefreshSatisfaction();
+        RefreshBestScore();
+        SaveManager.Inst.SaveGame();
         ResultUI.Open();
 
         Debug.Log($"게임 종료!! 최종 점수 : {Score}");
+    }
+
+    public void AddVisitCustomer()
+    {
+        GameResultModel.VisitCustomerCount++;
+    }
+
+    public void AddCompletedOrder()
+    {
+        GameResultModel.CompletedOrderCount++;
+    }
+
+    public void AddFailedCustomer()
+    {
+        GameResultModel.FailedCustomerCount++;
+    }
+
+    private void RefreshSatisfaction()
+    {
+        if (GameResultModel.VisitCustomerCount <= 0)
+        {
+            GameResultModel.SatisfactionPercent = 100;
+            return;
+        }
+
+        float ratio = (float)GameResultModel.CompletedOrderCount / GameResultModel.VisitCustomerCount;
+
+        GameResultModel.SatisfactionPercent = Mathf.RoundToInt(ratio * 100f);
+    }
+
+    private void RefreshBestScore()
+    {
+        GameResultModel.BestScore = SaveManager.Inst.SaveData.BestScore;
+
+        if (Score <= GameResultModel.BestScore)
+        {
+            return;
+        }
+
+        GameResultModel.BestScore = Score;
+        SaveManager.Inst.SaveData.BestScore = Score;
+    }
+
+    private void ResetGameResult()
+    {
+        GameResultModel = new GameResultModel();
+
+        GameResultModel.BestScore = SaveManager.Inst.SaveData.BestScore;
     }
 }

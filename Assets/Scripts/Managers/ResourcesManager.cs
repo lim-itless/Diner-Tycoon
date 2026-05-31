@@ -39,22 +39,34 @@ public class ResourceManager : MonoBehaviour
         return prefab;
     }
 
-    public Sprite LoadSprite(string path)
+    public Sprite LoadSprite(string spriteId)
     {
-        if (_spriteDictionary.ContainsKey(path))
-        {
-            return _spriteDictionary[path];
-        }
-
-        Sprite sprite = Resources.Load<Sprite>(path);
-
-        if (sprite == null)
+        if (string.IsNullOrEmpty(spriteId) == true)
         {
             return null;
         }
 
-        _spriteDictionary.Add(path, sprite);
+        int lastSlashIndex = spriteId.LastIndexOf('/');
 
-        return sprite;
+        if (lastSlashIndex < 0)
+        {
+            return Resources.Load<Sprite>(spriteId);
+        }
+
+        string sheetPath = spriteId.Substring(0, lastSlashIndex);
+        string spriteName = spriteId.Substring(lastSlashIndex + 1);
+
+        Sprite[] sprites = Resources.LoadAll<Sprite>(sheetPath);
+
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i].name == spriteName)
+            {
+                return sprites[i];
+            }
+        }
+
+        Debug.LogWarning($"Sprite 로드 실패 : {spriteId}");
+        return null;
     }
 }

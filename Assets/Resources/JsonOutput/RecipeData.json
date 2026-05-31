@@ -1,0 +1,27 @@
+[
+  {
+    "RecipeId": "Recipe_PotatoSoup",
+    "Ingredients": [
+      "Potato",
+      "Milk"
+    ],
+    "ResultFoodType": "PotatoSoup"
+  },
+  {
+    "RecipeId": "Recipe_ClamChowder",
+    "Ingredients": [
+      "Clam",
+      "Milk",
+      "Potato"
+    ],
+    "ResultFoodType": "ClamChowder"
+  },
+  {
+    "RecipeId": "Recipe_PotatoMashInShell",
+    "Ingredients": [
+      "Potato",
+      "Clam"
+    ],
+    "ResultFoodType": "PotatoMashInShell"
+  }
+]
