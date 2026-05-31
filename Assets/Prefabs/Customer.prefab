@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7885563465299619599}
   - component: {fileID: 334384272244434224}
+  - component: {fileID: 6730056866339193952}
+  - component: {fileID: 891406238973613607}
   m_Layer: 6
   m_Name: CustomerView
   m_TagString: Untagged
@@ -91,6 +93,41 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &6730056866339193952
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294509782160555241}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &891406238973613607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294509782160555241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6135372226172b9428d5a495cdd5c89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerView
+  _animator: {fileID: 6730056866339193952}
 --- !u!1 &4824805131917401477
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   BodyRenderer: {fileID: 334384272244434224}
   CustomerRenderer: {fileID: 334384272244434224}
+  CustomerView: {fileID: 891406238973613607}
   _orderFoodTypes: 040000000500000006000000
   OrderBubblePrefab: {fileID: 7559122015951505510, guid: b7552c7f3af90cc40a17f086085ad2f0, type: 3}
   ScorePopupPrefab: {fileID: 3623434605490907812, guid: d18d135d8ea597247b63a3296818e2c3, type: 3}

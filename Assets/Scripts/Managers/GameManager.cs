@@ -103,10 +103,9 @@ public class GameManager : MonoBehaviour
 
         RefreshSatisfaction();
         RefreshBestScore();
+        RefreshDay();
         SaveManager.Inst.SaveGame();
         ResultUI.Open();
-
-        Debug.Log($"게임 종료!! 최종 점수 : {Score}");
     }
 
     public void AddVisitCustomer()
@@ -122,6 +121,11 @@ public class GameManager : MonoBehaviour
     public void AddFailedCustomer()
     {
         GameResultModel.FailedCustomerCount++;
+    }
+
+    private void RefreshDay()
+    {
+        SaveManager.Inst.SaveData.CurrentDay++;
     }
 
     private void RefreshSatisfaction()

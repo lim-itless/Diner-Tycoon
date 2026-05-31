@@ -11,27 +11,19 @@ public class GameDataBase
 [Serializable]
 public class CustomerData : GameDataBase
 {
-    public string Name;
+    public string CustomerId;
+    public string CustomerName;
     public string CustomerTypeName;
+
+    public string AnimatorControllerPath;
+
     public float WaitTime;
     public float MoveSpeed;
     public int RewardScore;
-
-    public string NormalFrontSpriteId;
-    public string NormalSideSpriteId;
-    public string NormalBackSpriteId;
-
-    public string BadFrontSpriteId;
-    public string BadSideSpriteId;
-    public string BadBackSpriteId;
     
-    public string AngryFrontSpriteId;
-    public string AngrySideSpriteId;
-    public string AngryBackSpriteId;
-
     public CustomerType GetCustomerType()
     {
-        if (Enum.TryParse(CustomerTypeName, out CustomerType customerType) == false)
+        if (Enum.TryParse(CustomerName, out CustomerType customerType) == false)
         {
             return CustomerType.Normal;
         }
@@ -41,7 +33,7 @@ public class CustomerData : GameDataBase
 }
 
 [Serializable]
-public class CustomerDataList : GameDataBase
+public class CustomerDataList
 {
     public List<CustomerData> CustomerDatas;
 }
@@ -54,7 +46,7 @@ public class CustomerSpawnData : GameDataBase
 }
 
 [Serializable]
-public class CustomerSpawnDataList : GameDataBase
+public class CustomerSpawnDataList
 {
     public List<CustomerSpawnData> CustomerSpawnDatas;
 }
@@ -78,7 +70,7 @@ public class RecipeData : GameDataBase
 }
 
 [Serializable]
-public class RecipeDataList : GameDataBase
+public class RecipeDataList
 {
     public List<RecipeData> RecipeDatas;
 }

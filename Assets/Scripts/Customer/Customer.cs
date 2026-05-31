@@ -26,8 +26,8 @@ public class Customer : MonoBehaviour, IInteractable
     }
 
     [SerializeField] private SpriteRenderer BodyRenderer;
-    //[SerializeField] private SpriteRenderer FaceRenderer;
     [SerializeField] private SpriteRenderer CustomerRenderer;
+    [SerializeField] private CustomerView CustomerView;
 
     [SerializeField] private IngredientType[] _orderFoodTypes;
 
@@ -36,6 +36,7 @@ public class Customer : MonoBehaviour, IInteractable
 
     [SerializeField] private AudioClip _serveSuccessSFX;
 
+    [NonSerialized]
     private CustomerData _customerData;
     private IngredientType _orderFoodType;
 
@@ -95,6 +96,9 @@ public class Customer : MonoBehaviour, IInteractable
         _faceState = CustomerFaceState.Normal;
         _customerDirection = CustomerDirection.Front;
 
+        RuntimeAnimatorController controller = ResourceManager.Inst.LoadAnimatorController(_customerData.AnimatorControllerPath);
+        CustomerView.SetAnimatorController(controller);
+
         RefreshView();
     }
 
@@ -106,6 +110,8 @@ public class Customer : MonoBehaviour, IInteractable
         _onExitCompleted = onExitCompleted;
 
         _customerState = CustomerState.MoveToWaitLine;
+
+        CustomerView.PlayAnimation(CustomerAnimAction.Walk);
     }
 
     public void Interact(PlayerController playerController)
@@ -154,6 +160,8 @@ public class Customer : MonoBehaviour, IInteractable
 
         _customerState = CustomerState.WaitOrder;
         _currentWaitTime = _waitTime;
+
+        CustomerView.PlayAnimation(CustomerAnimAction.Idle);
 
         InitializeOrderBubble();
     }
@@ -220,13 +228,14 @@ public class Customer : MonoBehaviour, IInteractable
     {
         _customerState = CustomerState.Exit;
 
+        CustomerView.PlayAnimation(CustomerAnimAction.Walk);
+
         if (_orderBubbleUI == null)
         {
             return;
         }
 
         GameObjectManager.Inst.RemoveObject(_orderBubbleUI.gameObject);
-        //_orderBubbleUI = null;
     }
 
     private void SetRandomOrder()
@@ -291,8 +300,7 @@ public class Customer : MonoBehaviour, IInteractable
             return;
         }
 
-        float waitRatio =
-            _currentWaitTime / _waitTime;
+        float waitRatio = _currentWaitTime / _waitTime;
 
         if (waitRatio <= 0.3f)
         {
@@ -347,52 +355,52 @@ public class Customer : MonoBehaviour, IInteractable
 
     private string GetCurrentSpriteId()
     {
-        if (_customerData == null)
-        {
-            return string.Empty;
-        }
+        //if (_customerData == null)
+        //{
+        //    return string.Empty;
+        //}
 
-        if (_faceState == CustomerFaceState.Angry)
-        {
-            if (_customerDirection == CustomerDirection.Back)
-            {
-                return _customerData.AngryBackSpriteId;
-            }
+        //if (_faceState == CustomerFaceState.Angry)
+        //{
+        //    if (_customerDirection == CustomerDirection.Back)
+        //    {
+        //        return _customerData.AngryBackSpriteId;
+        //    }
 
-            if (_customerDirection == CustomerDirection.Side)
-            {
-                return _customerData.AngrySideSpriteId;
-            }
+        //    if (_customerDirection == CustomerDirection.Side)
+        //    {
+        //        return _customerData.AngrySideSpriteId;
+        //    }
 
-            return _customerData.AngryFrontSpriteId;
-        }
+        //    return _customerData.AngryFrontSpriteId;
+        //}
 
-        if (_faceState == CustomerFaceState.Bad)
-        {
-            if (_customerDirection == CustomerDirection.Back)
-            {
-                return _customerData.BadBackSpriteId;
-            }
+        //if (_faceState == CustomerFaceState.Bad)
+        //{
+        //    if (_customerDirection == CustomerDirection.Back)
+        //    {
+        //        return _customerData.BadBackSpriteId;
+        //    }
 
-            if (_customerDirection == CustomerDirection.Side)
-            {
-                return _customerData.BadSideSpriteId;
-            }
+        //    if (_customerDirection == CustomerDirection.Side)
+        //    {
+        //        return _customerData.BadSideSpriteId;
+        //    }
 
-            return _customerData.BadFrontSpriteId;
-        }
+        //    return _customerData.BadFrontSpriteId;
+        //}
 
-        if (_customerDirection == CustomerDirection.Back)
-        {
-            return _customerData.NormalBackSpriteId;
-        }
+        //if (_customerDirection == CustomerDirection.Back)
+        //{
+        //    return _customerData.NormalBackSpriteId;
+        //}
 
-        if (_customerDirection == CustomerDirection.Side)
-        {
-            return _customerData.NormalSideSpriteId;
-        }
+        //if (_customerDirection == CustomerDirection.Side)
+        //{
+        //    return _customerData.NormalSideSpriteId;
+        //}
 
-        return _customerData.NormalFrontSpriteId;
+        return "";
     }
 
     private void RefreshDirection(Vector3 moveDirection)

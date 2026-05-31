@@ -3,34 +3,18 @@
     "Id": "Customer_Normal_01",
     "Name": "동네 손님",
     "CustomerTypeName": "Normal",
+    "AnimatorControllerPath": "CustomerAnimator/RabbitAnimController",
     "WaitTime": 25,
     "MoveSpeed": 2.5,
-    "RewardScore": 100,
-    "NormalFrontSpriteId": "Customer/Rabbit_Normal/Rabbit_Normal_Front_0",
-    "NormalSideSpriteId": "Customer/Rabbit_Normal/Rabbit_Normal_Side_0",
-    "NormalBackSpriteId": "Customer/Rabbit_Normal/Rabbit_Normal_Back_0",
-    "BadFrontSpriteId": "Customer/Rabbit_Bad/Rabbit_Bad_Front_0",
-    "BadSideSpriteId": "Customer/Rabbit_Bad/Rabbit_Bad_Side_0",
-    "BadBackSpriteId": "Customer/Rabbit_Bad/Rabbit_Bad_Back_0",
-    "AngryFrontSpriteId": "Customer/Rabbit_Angry/Rabbit_Angry_Front_0",
-    "AngrySideSpriteId": "Customer/Rabbit_Angry/Rabbit_Angry_Side_0",
-    "AngryBackSpriteId": "Customer/Rabbit_Angry/Rabbit_Angry_Back_0"
+    "RewardScore": 100
   },
   {
     "Id": "Customer_VIP_01",
     "Name": "미식가 손님",
     "CustomerTypeName": "VIP",
+    "AnimatorControllerPath": "CustomerAnimator/SibaAnimController",
     "WaitTime": 35,
     "MoveSpeed": 2.2,
-    "RewardScore": 300,
-    "NormalFrontSpriteId": "Customer/Siba_Normal/Siba_Normal_Front_0",
-    "NormalSideSpriteId": "Customer/Siba_Normal/Siba_Normal_Side_0",
-    "NormalBackSpriteId": "Customer/Siba_Normal/Siba_Normal_Back_0",
-    "BadFrontSpriteId": "Customer/Siba_Bad/Siba_Bad_Front_0",
-    "BadSideSpriteId": "Customer/Siba_Bad/Siba_Bad_Side_0",
-    "BadBackSpriteId": "Customer/Siba_Bad/Siba_Bad_Back_0",
-    "AngryFrontSpriteId": "Customer/Siba_Angry/Siba_Angry_Front_0",
-    "AngrySideSpriteId": "Customer/Siba_Angry/Siba_Angry_Side_0",
-    "AngryBackSpriteId": "Customer/Siba_Angry/Siba_Angry_Back_0"
+    "RewardScore": 300
   }
 ]

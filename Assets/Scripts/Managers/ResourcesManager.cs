@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -68,5 +69,15 @@ public class ResourceManager : MonoBehaviour
 
         Debug.LogWarning($"Sprite 로드 실패 : {spriteId}");
         return null;
+    }
+
+    public RuntimeAnimatorController LoadAnimatorController (string path)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            return null;
+        }
+
+        return Resources.Load<RuntimeAnimatorController>(path);
     }
 }
