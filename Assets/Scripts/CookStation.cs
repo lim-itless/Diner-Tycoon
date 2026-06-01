@@ -111,4 +111,18 @@ public class CookStation : MonoBehaviour, IInteractable
 
         RefreshFoodObject();
     }
+
+    public void ResetStation()
+    {
+        _ingredientList.Clear();
+        _completedFoodType = IngredientType.None;
+
+        if (_currentFoodObject == null)
+        {
+            return;
+        }
+
+        Destroy(_currentFoodObject);
+        _currentFoodObject = null;
+    }
 }

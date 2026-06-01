@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.InputSystem.XR.Haptics;
 
 public class Customer : MonoBehaviour, IInteractable
 {
@@ -25,8 +24,6 @@ public class Customer : MonoBehaviour, IInteractable
         Back
     }
 
-    [SerializeField] private SpriteRenderer BodyRenderer;
-    [SerializeField] private SpriteRenderer CustomerRenderer;
     [SerializeField] private CustomerView CustomerView;
 
     [SerializeField] private IngredientType[] _orderFoodTypes;
@@ -52,13 +49,16 @@ public class Customer : MonoBehaviour, IInteractable
     private float _currentWaitTime;
 
     private CustomerState _customerState;
-    private CustomerFaceState _faceState;
-    private CustomerDirection _customerDirection;
 
     private Action<Customer> _onExitCompleted;
 
     private void Update()
     {
+        if (GameManager.Inst.IsGamePlaying == false)
+        {
+            return;
+        }
+
         MoveToWaitLine();
         MoveToExit();
         HandleWaitTimer();
@@ -93,13 +93,8 @@ public class Customer : MonoBehaviour, IInteractable
                 break;
         }
 
-        _faceState = CustomerFaceState.Normal;
-        _customerDirection = CustomerDirection.Front;
-
         RuntimeAnimatorController controller = ResourceManager.Inst.LoadAnimatorController(_customerData.AnimatorControllerPath);
         CustomerView.SetAnimatorController(controller);
-
-        RefreshView();
     }
 
     public void Initialize(Transform orderBubbleLayout, Vector3 waitPosition, Vector3 exitPosition, Action<Customer> onExitCompleted)
@@ -144,11 +139,6 @@ public class Customer : MonoBehaviour, IInteractable
             return;
         }
 
-        Vector3 moveDirection = (_waitPosition - transform.position).normalized;
-
-        RefreshDirection(moveDirection);
-        RefreshView();
-
         transform.position = Vector3.MoveTowards(transform.position, _waitPosition, _moveSpeed * Time.deltaTime);
 
         float distance = Vector3.Distance(transform.position, _waitPosition);
@@ -184,7 +174,7 @@ public class Customer : MonoBehaviour, IInteractable
 
         _onExitCompleted?.Invoke(this);
 
-        Destroy(gameObject);
+        GameObjectManager.Inst.RemoveObject(gameObject);
     }
 
     private void HandleWaitTimer()
@@ -197,7 +187,6 @@ public class Customer : MonoBehaviour, IInteractable
         _currentWaitTime -= Time.deltaTime;
 
         RefreshWaitGauge();
-        RefreshFaceState();
 
         if (_currentWaitTime > 0)
         {
@@ -230,12 +219,18 @@ public class Customer : MonoBehaviour, IInteractable
 
         CustomerView.PlayAnimation(CustomerAnimAction.Walk);
 
+        ClearRuntime();
+    }
+
+    public void ClearRuntime()
+    {
         if (_orderBubbleUI == null)
         {
             return;
         }
 
-        GameObjectManager.Inst.RemoveObject(_orderBubbleUI.gameObject);
+        Destroy(_orderBubbleUI.gameObject);
+        _orderBubbleUI = null;
     }
 
     private void SetRandomOrder()
@@ -291,132 +286,5 @@ public class Customer : MonoBehaviour, IInteractable
         WorldTextPopup popup = Instantiate(ScorePopupPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
 
         popup.SetText($"+ {_rewardScore}");
-    }
-
-    private void RefreshFaceState()
-    {
-        if (_waitTime <= 0)
-        {
-            return;
-        }
-
-        float waitRatio = _currentWaitTime / _waitTime;
-
-        if (waitRatio <= 0.3f)
-        {
-            ChangeFaceState(CustomerFaceState.Angry);
-            return;
-        }
-
-        if (waitRatio <= 0.6f)
-        {
-            ChangeFaceState(CustomerFaceState.Bad);
-            return;
-        }
-
-        ChangeFaceState(CustomerFaceState.Normal);
-    }
-
-    private void ChangeFaceState(CustomerFaceState faceState)
-    {
-        if (_faceState == faceState)
-        {
-            return;
-        }
-
-        _faceState = faceState;
-
-        RefreshView();
-    }
-
-    private void RefreshView()
-    {
-        if (CustomerRenderer == null)
-        {
-            return;
-        }
-
-        string spriteId = GetCurrentSpriteId();
-
-        if (string.IsNullOrEmpty(spriteId) == true)
-        {
-            return;
-        }
-
-        Sprite sprite = ResourceManager.Inst.LoadSprite(spriteId);
-
-        if (sprite == null)
-        {
-            return;
-        }
-
-        CustomerRenderer.sprite = sprite;
-    }
-
-    private string GetCurrentSpriteId()
-    {
-        //if (_customerData == null)
-        //{
-        //    return string.Empty;
-        //}
-
-        //if (_faceState == CustomerFaceState.Angry)
-        //{
-        //    if (_customerDirection == CustomerDirection.Back)
-        //    {
-        //        return _customerData.AngryBackSpriteId;
-        //    }
-
-        //    if (_customerDirection == CustomerDirection.Side)
-        //    {
-        //        return _customerData.AngrySideSpriteId;
-        //    }
-
-        //    return _customerData.AngryFrontSpriteId;
-        //}
-
-        //if (_faceState == CustomerFaceState.Bad)
-        //{
-        //    if (_customerDirection == CustomerDirection.Back)
-        //    {
-        //        return _customerData.BadBackSpriteId;
-        //    }
-
-        //    if (_customerDirection == CustomerDirection.Side)
-        //    {
-        //        return _customerData.BadSideSpriteId;
-        //    }
-
-        //    return _customerData.BadFrontSpriteId;
-        //}
-
-        //if (_customerDirection == CustomerDirection.Back)
-        //{
-        //    return _customerData.NormalBackSpriteId;
-        //}
-
-        //if (_customerDirection == CustomerDirection.Side)
-        //{
-        //    return _customerData.NormalSideSpriteId;
-        //}
-
-        return "";
-    }
-
-    private void RefreshDirection(Vector3 moveDirection)
-    {
-        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
-        {
-            _customerDirection = CustomerDirection.Side;
-            return;
-        }
-
-        if (moveDirection.y > 0)
-        {
-            _customerDirection = CustomerDirection.Back;
-            return;
-        }
-
-        _customerDirection = CustomerDirection.Front;
     }
 }

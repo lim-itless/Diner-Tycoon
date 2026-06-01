@@ -14,4 +14,14 @@ public class UIBase : MonoBehaviour
         button.onClick.RemoveListener(action);
         button.onClick.AddListener(action);
     }
+
+    public virtual void Open()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Close()
+    {
+        gameObject.SetActive(false);
+    }
 }

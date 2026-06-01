@@ -61,4 +61,14 @@ public class SoundManager : MonoBehaviour
     {
         PlaySFX(_buttonClickSFX);
     }
+
+    public void StopBGM()
+    {
+        if (AudioSource_BGM == null)
+        {
+            return;
+        }
+
+        AudioSource_BGM.Stop();
+    }
 }

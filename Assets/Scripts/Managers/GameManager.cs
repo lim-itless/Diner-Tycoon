@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float _gameTime = 60f;
-    [SerializeField] private ResultUI ResultUI;
     [SerializeField] private CustomerSpawner CustomerSpawner;
+    [SerializeField] private CookStation CookStation;
+    [SerializeField] private PlayerController PlayerController;
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnTimeChanged;
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        ClearDayRuntime();
         ResetGameResult();
 
         Score = 0;
@@ -101,11 +102,17 @@ public class GameManager : MonoBehaviour
         IsGameEnd = true;
         IsGamePlaying = false;
 
+        ClearDayRuntime();
+
         RefreshSatisfaction();
         RefreshBestScore();
         RefreshDay();
+
         SaveManager.Inst.SaveGame();
-        ResultUI.Open();
+
+        SoundManager.Inst.StopBGM();
+
+        UIManager.Inst.OpenUI<ResultUI>();
     }
 
     public void AddVisitCustomer()
@@ -159,5 +166,20 @@ public class GameManager : MonoBehaviour
         GameResultModel = new GameResultModel();
 
         GameResultModel.BestScore = SaveManager.Inst.SaveData.BestScore;
+    }
+
+    private void ClearDayRuntime()
+    {
+        CustomerSpawner.ClearCustomers();
+
+        if (CookStation != null)
+        {
+            CookStation.ResetStation();
+        }
+
+        if (PlayerController != null)
+        {
+            PlayerController.ClearIngredient();
+        }
     }
 }

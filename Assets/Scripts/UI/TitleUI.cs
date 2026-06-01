@@ -5,7 +5,6 @@ public class TitleUI : UIBase
 {
     [SerializeField] private Button Button_Start;
     [SerializeField] private Button Button_Quit;
-    [SerializeField] private GameObject Object_MainHUD;
 
     private void Awake()
     {
@@ -20,10 +19,11 @@ public class TitleUI : UIBase
 
     private void OnClickStartButton()
     {
-        gameObject.SetActive(false);
-        Object_MainHUD.SetActive(true);
-
         SoundManager.Inst.PlayButtonClickSFX();
+
+        UIManager.Inst.CloseUI<TitleUI>();
+        UIManager.Inst.OpenUI<MainHUD>();
+
         GameManager.Inst.StartGame();
     }
 

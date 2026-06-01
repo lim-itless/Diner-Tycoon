@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultUI : UIBase
 {
@@ -8,15 +9,30 @@ public class ResultUI : UIBase
     [SerializeField] private TMP_Text Text_CompletedOrder;
     [SerializeField] private TMP_Text Text_Satisfaction;
 
-    public void Open()
+    [SerializeField] private Button Button_NextDay;
+    [SerializeField] private Button Button_Title;
+
+    private void Awake()
     {
-        gameObject.SetActive(true);
+        BindButtonEvents();
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        Refresh();
     }
 
     public void Refresh()
     {
         RefreshTodayScore();
         RefreshResultInfo();
+    }
+
+    private void BindButtonEvents()
+    {
+        BindOnClickButtonEvent(Button_NextDay, OnClickNextDay);
+        BindOnClickButtonEvent(Button_Title, OnClickTitle);
     }
 
     private void RefreshTodayScore()
@@ -31,5 +47,21 @@ public class ResultUI : UIBase
         Text_BestScore.text = resultModel.BestScore.ToString();
         Text_CompletedOrder.text = resultModel.CompletedOrderCount.ToString();
         Text_Satisfaction.text = $"{resultModel.SatisfactionPercent}%";
+    }
+
+    public void OnClickNextDay()
+    {
+        SoundManager.Inst.PlayButtonClickSFX();
+        UIManager.Inst.CloseUI<ResultUI>();
+        UIManager.Inst.OpenUI<MainHUD>();
+        GameManager.Inst.StartGame();
+    }
+
+    public void OnClickTitle()
+    {
+        SoundManager.Inst.PlayButtonClickSFX();
+        UIManager.Inst.CloseUI<ResultUI>();
+        UIManager.Inst.CloseUI<MainHUD>();
+        UIManager.Inst.OpenUI<TitleUI>();
     }
 }

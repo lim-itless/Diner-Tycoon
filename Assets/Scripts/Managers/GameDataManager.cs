@@ -12,8 +12,6 @@ public class GameDataManager : MonoBehaviour
         Inst = this;
 
         _customerDataDictionary = LoadData<CustomerData>("Customer");
-        //_customerSpawnDataDictionary = LoadData<CustomerSpawnData>("CustomerSpawnData");
-        //_recipeDataDictionary = LoadData<RecipeData>("RecipeData");
 
         LoadCustomerSpawnData();
         LoadRecipeData();
@@ -26,8 +24,6 @@ public class GameDataManager : MonoBehaviour
     }
 
     private Dictionary<string, CustomerData> _customerDataDictionary = new Dictionary<string, CustomerData>();
-    //private Dictionary<string, RecipeData> _recipeDataDictionary = new Dictionary<string, RecipeData>();
-    //private Dictionary<string, CustomerSpawnData> _customerSpawnDataDictionary = new Dictionary<string, CustomerSpawnData>();
     
     private readonly List<CustomerSpawnData> _customerSpawnDatas = new List<CustomerSpawnData>();
     private readonly List<RecipeData> _recipeDatas = new List<RecipeData>();

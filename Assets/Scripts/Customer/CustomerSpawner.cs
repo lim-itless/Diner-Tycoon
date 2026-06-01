@@ -147,4 +147,25 @@ public class CustomerSpawner : MonoBehaviour
 
         return -1;
     }
+
+    public void ClearCustomers()
+    {
+        StopAllCoroutines();
+
+        _isSpawning = false;
+
+        for (int i = 0; i < _customers.Length; i++)
+        {
+            if (_customers[i] == null)
+            {
+                continue;
+            }
+
+            _customers[i].ClearRuntime();
+
+            GameObjectManager.Inst.RemoveObject(_customers[i].gameObject);
+
+            _customers[i] = null;
+        }
+    }
 }

@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -9,11 +8,6 @@ public class SaveManager : MonoBehaviour
     private const string SAVE_FILE_NAME = "SaveData.json";
 
     public SaveData SaveData { get; private set; }
-    public GameResultModel GameResultModel { get; private set; }
-
-    private int _score;
-    private bool _isGameOver;
-    private float _remainingTime;
 
     private string SavePath
     {
