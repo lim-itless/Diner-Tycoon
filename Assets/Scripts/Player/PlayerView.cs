@@ -8,6 +8,7 @@ public class PlayerView : MonoBehaviour
     private static readonly int _isMoveHash = Animator.StringToHash("IsMove");
     private static readonly int _isCarryHash = Animator.StringToHash("IsCarry");
     private static readonly int _isCookHash = Animator.StringToHash("IsCook");
+    private static readonly int _isDanceHash = Animator.StringToHash("IsDance");
     private static readonly int _dirXHash = Animator.StringToHash("DirX");
     private static readonly int _dirYHash = Animator.StringToHash("DirY");
 
@@ -25,10 +26,10 @@ public class PlayerView : MonoBehaviour
         Animator_Player.SetBool(_isCookHash, isCook);
     }
 
-    //public void SetDance(bool isDance)
-    //{
-    //    animator.SetBool("IsDance", isDance);
-    //}
+    public void SetDance(bool isDance)
+    {
+        Animator_Player.SetBool(_isDanceHash, isDance);
+    }
 
     public void SetDirection(Vector2 direction)
     {

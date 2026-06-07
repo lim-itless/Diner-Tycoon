@@ -87,23 +87,6 @@ public class GameDataManager : MonoBehaviour
         Debug.Log($"CustomerSpawnData 로드 개수 : {_customerSpawnDatas.Count}");
     }
 
-    public CustomerData GetCustomerData(string id)
-    {
-        if (string.IsNullOrEmpty(id) == true)
-        {
-            Debug.LogWarning("Customer Id가 비어있습니다.");
-            return null;
-        }
-
-        if (_customerDataDictionary.ContainsKey(id) == false)
-        {
-            Debug.LogWarning($"{id} CustomerData가 없습니다.");
-            return null;
-        }
-
-        return _customerDataDictionary[id];
-    }
-
     private void LoadRecipeData()
     {
         TextAsset textAsset = Resources.Load<TextAsset>("JsonOutput/RecipeData");
@@ -126,6 +109,23 @@ public class GameDataManager : MonoBehaviour
 
         _recipeDatas.Clear();
         _recipeDatas.AddRange(dataList.RecipeDatas);
+    }
+
+    public CustomerData GetCustomerData(string id)
+    {
+        if (string.IsNullOrEmpty(id) == true)
+        {
+            Debug.LogWarning("Customer Id가 비어있습니다.");
+            return null;
+        }
+
+        if (_customerDataDictionary.ContainsKey(id) == false)
+        {
+            Debug.LogWarning($"{id} CustomerData가 없습니다.");
+            return null;
+        }
+
+        return _customerDataDictionary[id];
     }
 
     public CustomerData GetRandomCustomerData()
@@ -204,28 +204,47 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
-        private bool IsSameRecipe(RecipeData recipeData, List<IngredientType> ingredients)
+    public RecipeData GetRecipeData(IngredientType resultFoodType)
+    {
+        for (int i = 0; i < _recipeDatas.Count; i++)
         {
-            if (recipeData == null || recipeData.Ingredients == null)
+            RecipeData recipeData = _recipeDatas[i];
+
+            if (recipeData == null)
             {
-                return false;
+                continue;
             }
 
-            if (recipeData.Ingredients.Count != ingredients.Count)
+            if (recipeData.GetResultFoodType() == resultFoodType)
             {
-                return false;
+                return recipeData;
             }
-
-            for (int i = 0; i < ingredients.Count; i++)
-            {
-                string ingredientName = ingredients[i].ToString();
-
-                if (recipeData.Ingredients.Contains(ingredientName) == false)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
+        return null;
     }
+
+    private bool IsSameRecipe(RecipeData recipeData, List<IngredientType> ingredients)
+    {
+        if (recipeData == null || recipeData.Ingredients == null)
+        {
+            return false;
+        }
+
+        if (recipeData.Ingredients.Count != ingredients.Count)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < ingredients.Count; i++)
+        {
+            string ingredientName = ingredients[i].ToString();
+
+            if (recipeData.Ingredients.Contains(ingredientName) == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}

@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 926eed0ed4288824484107c3120843c1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7994011345398279051
+    second: DalE_Dance_Side_0
+  - first:
+      213: -8532540409006140796
+    second: DalE_Dance_Side_1
+  - first:
+      213: 4383321100281392875
+    second: DalE_Dance_Side_2
+  - first:
+      213: -2857140071646339793
+    second: DalE_Dance_Side_3
+  - first:
+      213: -3887341903081945535
+    second: DalE_Dance_Side_4
+  - first:
+      213: 806830551561569527
+    second: DalE_Dance_Side_5
+  - first:
+      213: 9104300407715151694
+    second: DalE_Dance_Side_6
+  - first:
+      213: -8293089773489986015
+    second: DalE_Dance_Side_7
+  - first:
+      213: 7580449295334647736
+    second: DalE_Dance_Side_8
+  - first:
+      213: -6590677023784789818
+    second: DalE_Dance_Side_9
+  - first:
+      213: 882146988564940147
+    second: DalE_Dance_Side_10
+  - first:
+      213: -4564149347483309727
+    second: DalE_Dance_Side_11
+  - first:
+      213: 3206268683629447152
+    second: DalE_Dance_Side_12
+  - first:
+      213: -5154557168493899686
+    second: DalE_Dance_Side_13
+  - first:
+      213: -1989893858668080900
+    second: DalE_Dance_Side_14
+  - first:
+      213: 598394860464436451
+    second: DalE_Dance_Side_15
+  - first:
+      213: 8925724404963821621
+    second: DalE_Dance_Side_16
+  - first:
+      213: -2974004431872712623
+    second: DalE_Dance_Side_17
+  - first:
+      213: 1999275620939660226
+    second: DalE_Dance_Side_18
+  - first:
+      213: 3449117605802061948
+    second: DalE_Dance_Side_19
+  - first:
+      213: -363091620204009578
+    second: DalE_Dance_Side_20
+  - first:
+      213: -4792609685876834104
+    second: DalE_Dance_Side_21
+  - first:
+      213: -8969681726739098350
+    second: DalE_Dance_Side_22
+  - first:
+      213: 3048843331961257644
+    second: DalE_Dance_Side_23
+  - first:
+      213: 2274826808484046562
+    second: DalE_Dance_Side_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DalE_Dance_Side_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 476
+        width: 175
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8b28ece6fe60fe60800000000000000
+      internalID: 7994011345398279051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_1
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 662
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482d58194b3569980800000000000000
+      internalID: -8532540409006140796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_2
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 476
+        width: 215
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bee2fbe115fa4dc30800000000000000
+      internalID: 4383321100281392875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_3
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 651
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2d5cfb1e366958d0800000000000000
+      internalID: -2857140071646339793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_4
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 476
+        width: 189
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1464f4a92236d0ac0800000000000000
+      internalID: -3887341903081945535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_5
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 650
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f482c3ac10723b00800000000000000
+      internalID: 806830551561569527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_6
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 476
+        width: 214
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f3e42fbf8f85e70800000000000000
+      internalID: 9104300407715151694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_7
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 476
+        width: 188
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12664b82ac609ec80800000000000000
+      internalID: -8293089773489986015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_8
+      rect:
+        serializedVersion: 2
+        x: 1605
+        y: 639
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7284e987a233960800000000000000
+      internalID: 7580449295334647736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_9
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 556
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c89aff6a263984a0800000000000000
+      internalID: -6590677023784789818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_10
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 551
+        width: 26
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375081523040e3c00800000000000000
+      internalID: 882146988564940147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_11
+      rect:
+        serializedVersion: 2
+        x: 1605
+        y: 551
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1692d61b952e8a0c0800000000000000
+      internalID: -4564149347483309727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_12
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 142
+        width: 185
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f741365164fe7c20800000000000000
+      internalID: 3206268683629447152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_13
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 315
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a505a75b0955778b0800000000000000
+      internalID: -5154557168493899686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_14
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 143
+        width: 217
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf09b55141a7264e0800000000000000
+      internalID: -1989893858668080900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_15
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 301
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e4f66584fced4800800000000000000
+      internalID: 598394860464436451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_16
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 144
+        width: 177
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53847e84e0b8edb70800000000000000
+      internalID: 8925724404963821621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_17
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 315
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1502ac5e9b63ab6d0800000000000000
+      internalID: -2974004431872712623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_18
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 142
+        width: 189
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cbf43aa59adebb10800000000000000
+      internalID: 1999275620939660226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_19
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 315
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70b062303abddf20800000000000000
+      internalID: 3449117605802061948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_20
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 144
+        width: 203
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697a1dc581a06faf0800000000000000
+      internalID: -363091620204009578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_21
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 324
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c0073e02ea3d7db0800000000000000
+      internalID: -4792609685876834104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_22
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 231
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21557613ef9458380800000000000000
+      internalID: -8969681726739098350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_23
+      rect:
+        serializedVersion: 2
+        x: 1269
+        y: 216
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae7e516bdaaf4a20800000000000000
+      internalID: 3048843331961257644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Dance_Side_24
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 218
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e62a350eeec19f10800000000000000
+      internalID: 2274826808484046562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DalE_Dance_Side_0: 7994011345398279051
+      DalE_Dance_Side_1: -8532540409006140796
+      DalE_Dance_Side_10: 882146988564940147
+      DalE_Dance_Side_11: -4564149347483309727
+      DalE_Dance_Side_12: 3206268683629447152
+      DalE_Dance_Side_13: -5154557168493899686
+      DalE_Dance_Side_14: -1989893858668080900
+      DalE_Dance_Side_15: 598394860464436451
+      DalE_Dance_Side_16: 8925724404963821621
+      DalE_Dance_Side_17: -2974004431872712623
+      DalE_Dance_Side_18: 1999275620939660226
+      DalE_Dance_Side_19: 3449117605802061948
+      DalE_Dance_Side_2: 4383321100281392875
+      DalE_Dance_Side_20: -363091620204009578
+      DalE_Dance_Side_21: -4792609685876834104
+      DalE_Dance_Side_22: -8969681726739098350
+      DalE_Dance_Side_23: 3048843331961257644
+      DalE_Dance_Side_24: 2274826808484046562
+      DalE_Dance_Side_3: -2857140071646339793
+      DalE_Dance_Side_4: -3887341903081945535
+      DalE_Dance_Side_5: 806830551561569527
+      DalE_Dance_Side_6: 9104300407715151694
+      DalE_Dance_Side_7: -8293089773489986015
+      DalE_Dance_Side_8: 7580449295334647736
+      DalE_Dance_Side_9: -6590677023784789818
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

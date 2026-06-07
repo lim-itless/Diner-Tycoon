@@ -4,5 +4,6 @@
     Move,
     CarryIdle,
     CarryMove,
-    Cook
+    Cook,
+    Dance
 }

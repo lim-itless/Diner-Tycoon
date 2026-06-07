@@ -11,11 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _interactRange = 1.5f;
     [SerializeField] private LayerMask _interactableLayer;
     [SerializeField] private Transform HoldSpot;
+    [SerializeField] private Vector2 _interactOffset = new Vector2(0f, 4f);
 
     private GameObject _currentCarryObject;
     private Vector2 _moveInput;
     private Vector2 _lastMoveDirection = Vector2.down;
     private float _lastHorizontalDirection = 1f;
+    private bool _isCook;
+    private bool _isDance;
+
     public IngredientType CurrentIngredientType { get; private set; }
     public PlayerState CurrentPlayerState { get; private set; }
     public bool IsCarry { get; private set; }
@@ -30,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         ReadMoveInput();
         HandleInteractInput();
+        HandleDanceInput();
         RefreshPlayerState();
         RefreshPlayerView();
     }
@@ -37,7 +42,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        //Dance();
     }
 
     private void ReadMoveInput()
@@ -68,38 +72,77 @@ public class PlayerController : MonoBehaviour
         TryInteract();
     }
 
+    private void HandleDanceInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) == false)
+        {
+            return;
+        }
+
+        PlayDance();
+    }
+
     private void RefreshPlayerState()
     {
         bool isMove = _moveInput != Vector2.zero;
 
         if (IsCarry == true)
         {
-            CurrentPlayerState = isMove == true
-                ? PlayerState.CarryMove
-                : PlayerState.CarryIdle;
-
+            CurrentPlayerState = isMove == true ? PlayerState.CarryMove : PlayerState.CarryIdle;
             return;
         }
 
-        CurrentPlayerState = isMove == true
-            ? PlayerState.Move
-            : PlayerState.Idle;
+        CurrentPlayerState = isMove == true ? PlayerState.Move : PlayerState.Idle;
     }
 
     private void RefreshPlayerView()
     {
-        bool isMove =
-            CurrentPlayerState == PlayerState.Move ||
-            CurrentPlayerState == PlayerState.CarryMove;
-
-        bool isCarry =
-            CurrentPlayerState == PlayerState.CarryIdle ||
-            CurrentPlayerState == PlayerState.CarryMove;
+        bool isMove = CurrentPlayerState == PlayerState.Move || CurrentPlayerState == PlayerState.CarryMove;
+        bool isCarry = CurrentPlayerState == PlayerState.CarryIdle || CurrentPlayerState == PlayerState.CarryMove;
+        bool isCook = _isCook;
+        bool isDance = _isDance;
 
         PlayerView.SetMove(isMove);
         PlayerView.SetCarry(isCarry);
+        PlayerView.SetCook(isCook);
+        PlayerView.SetDance(isDance);
+
         PlayerView.SetDirection(_lastMoveDirection);
         PlayerView.Flip(_lastHorizontalDirection);
+    }
+
+    public void PlayCook()
+    {
+        _isCook = true;
+
+        RefreshPlayerView();
+
+        CancelInvoke(nameof(StopCook));
+        Invoke(nameof(StopCook), 0.4f);
+    }
+
+    private void StopCook()
+    {
+        _isCook = false;
+
+        RefreshPlayerView();
+    }
+
+    private void PlayDance()
+    {
+        _isDance = true;
+
+        RefreshPlayerView();
+
+        CancelInvoke(nameof(StopDance));
+        Invoke(nameof(StopDance), 0.6f);
+    }
+
+    private void StopDance()
+    {
+        _isDance = false;
+
+        RefreshPlayerView();
     }
 
     private void Move()
@@ -109,7 +152,9 @@ public class PlayerController : MonoBehaviour
 
     private void TryInteract()
     {
-        Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, _interactRange,_interactableLayer);
+        Vector2 interactCenter = (Vector2)transform.position + _interactOffset;
+
+        Collider2D hitCollider = Physics2D.OverlapCircle(interactCenter, _interactRange,_interactableLayer);
 
         if (hitCollider == null)
         {
@@ -145,34 +190,22 @@ public class PlayerController : MonoBehaviour
         IsCarry = false;
 
         ClearCarryObject();
+
+        RefreshPlayerState();
+        RefreshPlayerView();
     }
-
-    //private void Dance()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.O))
-    //    {
-    //        PlayerView.SetDance(true);
-    //        Invoke(nameof(EndDance), 0.5f);
-    //    }
-    //}
-
-    //private void EndDance()
-    //{
-    //    PlayerView.SetDance(false);
-    //}
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.orange;
-        Gizmos.DrawWireSphere(transform.position, _interactRange);
+        Gizmos.DrawWireSphere((Vector2)transform.position + _interactOffset, _interactRange);
     }
 
     private void CreateCarryObject(IngredientType ingredientType)
     {
         ClearCarryObject();
 
-        GameObject carryPrefab =
-            ResourceManager.Inst.LoadPrefab($"Prefabs/Food/Food_{ingredientType}");
+        GameObject carryPrefab = ResourceManager.Inst.LoadPrefab($"Prefabs/Food/Food_{ingredientType}");
 
         if (carryPrefab == null)
         {
@@ -193,5 +226,15 @@ public class PlayerController : MonoBehaviour
 
         Destroy(_currentCarryObject);
         _currentCarryObject = null;
+    }
+
+    public void ResetPlayerState()
+    {
+        ClearIngredient();
+
+        _moveInput = Vector2.zero;
+        CurrentPlayerState = PlayerState.Idle;
+
+        RefreshPlayerView();
     }
 }

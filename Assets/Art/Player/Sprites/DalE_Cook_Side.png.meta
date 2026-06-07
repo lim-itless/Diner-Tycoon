@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: 06cfb8ba6ed829f43a7493b4b84a9b7d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8493936137946953572
+    second: DalE_Cook_Side_0
+  - first:
+      213: -9025002212001675575
+    second: DalE_Cook_Side_1
+  - first:
+      213: 8884636968677838106
+    second: DalE_Cook_Side_2
+  - first:
+      213: -4681356315195031038
+    second: DalE_Cook_Side_3
+  - first:
+      213: 7341917313263532887
+    second: DalE_Cook_Side_4
+  - first:
+      213: -8992542479332794347
+    second: DalE_Cook_Side_5
+  - first:
+      213: -6316385987956486434
+    second: DalE_Cook_Side_6
+  - first:
+      213: -8609719224195088514
+    second: DalE_Cook_Side_7
+  - first:
+      213: -3716698664164144287
+    second: DalE_Cook_Side_8
+  - first:
+      213: -1491006566000284078
+    second: DalE_Cook_Side_9
+  - first:
+      213: 3788916351064429132
+    second: DalE_Cook_Side_10
+  - first:
+      213: -1155701891710395989
+    second: DalE_Cook_Side_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DalE_Cook_Side_0
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 558
+        width: 227
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9881d8d51a7f1a80800000000000000
+      internalID: -8493936137946953572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_1
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 558
+        width: 268
+        height: 286
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c686800e40c0c280800000000000000
+      internalID: -9025002212001675575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_2
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 558
+        width: 232
+        height: 286
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d885c00429c4b70800000000000000
+      internalID: 8884636968677838106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_3
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 558
+        width: 238
+        height: 286
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 202c4c5fb3b780fb0800000000000000
+      internalID: -4681356315195031038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_4
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 558
+        width: 205
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75bfc53b5eab3e560800000000000000
+      internalID: 7341917313263532887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_5
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 160
+        width: 232
+        height: 286
+      alignment: 9
+      pivot: {x: 0.48374814, y: -0.00000021340963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51022c37242143380800000000000000
+      internalID: -8992542479332794347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_6
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 370
+        width: 34
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede499bd860b758a0800000000000000
+      internalID: -6316385987956486434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_7
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 160
+        width: 226
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7ffff95bf1248880800000000000000
+      internalID: -8609719224195088514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_8
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 160
+        width: 232
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16bc351c142ab6cc0800000000000000
+      internalID: -3716698664164144287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_9
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 160
+        width: 238
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25e27cb8d61ee4be0800000000000000
+      internalID: -1491006566000284078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_10
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 160
+        width: 256
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c425dd4c85fe49430800000000000000
+      internalID: 3788916351064429132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DalE_Cook_Side_11
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 300
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9da5ea04f16ffe0800000000000000
+      internalID: -1155701891710395989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a733be9676da6ca4e94949655d811e6f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DalE_Cook_Side_0: -8493936137946953572
+      DalE_Cook_Side_1: -9025002212001675575
+      DalE_Cook_Side_10: 3788916351064429132
+      DalE_Cook_Side_11: -1155701891710395989
+      DalE_Cook_Side_2: 8884636968677838106
+      DalE_Cook_Side_3: -4681356315195031038
+      DalE_Cook_Side_4: 7341917313263532887
+      DalE_Cook_Side_5: -8992542479332794347
+      DalE_Cook_Side_6: -6316385987956486434
+      DalE_Cook_Side_7: -8609719224195088514
+      DalE_Cook_Side_8: -3716698664164144287
+      DalE_Cook_Side_9: -1491006566000284078
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

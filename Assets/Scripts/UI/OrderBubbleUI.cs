@@ -9,6 +9,7 @@ public class OrderBubbleUI : UIBase
     [SerializeField] private Image Image_OrderIcon;
 
     [SerializeField] private Color _dangerColor = Color.red;
+    [SerializeField] private Color _middleColor = Color.yellow;
     [SerializeField] private Color _normalColor = Color.green;
 
     private Transform _targetTransform;
@@ -39,14 +40,25 @@ public class OrderBubbleUI : UIBase
         RefreshBubbleColor(ratio);
     }
 
-    private void RefreshBubbleColor(float ratio)
+    private void RefreshBubbleColor(float waitRatio)
     {
         if (Image_WaitGauge == null)
         {
             return;
         }
 
-        Image_WaitGauge.color = Color.Lerp(_dangerColor, _normalColor, ratio);
+        Color waitColor;
+
+        if (waitRatio > 0.5f)
+        {
+            waitColor = Color.Lerp(_middleColor, _normalColor, (waitRatio - 0.5f) / 0.5f);
+        }
+        else
+        {
+            waitColor = Color.Lerp(_dangerColor, _middleColor, waitRatio / 0.5f);
+        }
+
+        Image_WaitGauge.color = waitColor;
     }
 
     private void RefreshOrderIcon(IngredientType orderType)

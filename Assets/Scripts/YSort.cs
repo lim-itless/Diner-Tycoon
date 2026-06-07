@@ -4,7 +4,8 @@ using UnityEngine.Rendering;
 public class YSort : MonoBehaviour
 {
     [SerializeField] private SortingGroup SortingGroup_Target;
-    [SerializeField] private int _sortingOffset = 0;
+    [SerializeField] private Transform SortPivot;
+    [SerializeField] private int _sortingOffset;
 
     private void LateUpdate()
     {
@@ -18,7 +19,14 @@ public class YSort : MonoBehaviour
             return;
         }
 
+        Transform targetTransform = SortPivot;
+
+        if (targetTransform == null)
+        {
+            targetTransform = transform;
+        }
+
         SortingGroup_Target.sortingOrder =
-            Mathf.RoundToInt(-transform.position.y * 100) + _sortingOffset;
+            Mathf.RoundToInt(-targetTransform.position.y * 100f) + _sortingOffset;
     }
 }

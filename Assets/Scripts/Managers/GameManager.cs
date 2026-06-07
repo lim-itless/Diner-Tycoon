@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnTimeChanged;
+    public event Action<Customer> OnCustomerOrderAdded;
+    public event Action<Customer, float> OnCustomerWaitRatioChanged;
+    public event Action<Customer> OnCustomerOrderRemoved;
 
     private int _lastTime;
 
@@ -179,7 +182,22 @@ public class GameManager : MonoBehaviour
 
         if (PlayerController != null)
         {
-            PlayerController.ClearIngredient();
+            PlayerController.ResetPlayerState();
         }
+    }
+
+    public void AddCustomerOrder(Customer customer)
+    {
+        OnCustomerOrderAdded?.Invoke(customer);
+    }
+
+    public void RefreshCustomerWaitRatio(Customer customer, float waitRatio)
+    {
+        OnCustomerWaitRatioChanged?.Invoke(customer, waitRatio);
+    }
+
+    public void RemoveCustomerOrder(Customer customer)
+    {
+        OnCustomerOrderRemoved?.Invoke(customer);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Customer : MonoBehaviour, IInteractable
@@ -10,20 +11,6 @@ public class Customer : MonoBehaviour, IInteractable
         Exit
     }
 
-    public enum CustomerFaceState
-    {
-        Normal,
-        Bad,
-        Angry
-    }
-
-    public enum CustomerDirection
-    {
-        Front,
-        Side,
-        Back
-    }
-
     [SerializeField] private CustomerView CustomerView;
 
     [SerializeField] private IngredientType[] _orderFoodTypes;
@@ -31,10 +18,17 @@ public class Customer : MonoBehaviour, IInteractable
     [SerializeField] private OrderBubbleUI OrderBubblePrefab;
     [SerializeField] private WorldTextPopup ScorePopupPrefab;
 
+    [SerializeField] private SpriteRenderer SpriteRenderer_Reaction;
+
+    [SerializeField] private Sprite Sprite_Success;
+    [SerializeField] private Sprite Sprite_Wrong;
+    [SerializeField] private Sprite Sprite_Timeout;
+
     [SerializeField] private AudioClip _serveSuccessSFX;
 
     [NonSerialized]
     private CustomerData _customerData;
+
     private IngredientType _orderFoodType;
 
     private Transform _orderBubbleLayout;
@@ -42,6 +36,7 @@ public class Customer : MonoBehaviour, IInteractable
 
     private Vector3 _waitPosition;
     private Vector3 _exitPosition;
+    private Vector2 _lastMoveDirection = Vector2.down;
 
     private float _moveSpeed;
     private float _waitTime;
@@ -51,6 +46,19 @@ public class Customer : MonoBehaviour, IInteractable
     private CustomerState _customerState;
 
     private Action<Customer> _onExitCompleted;
+
+    public IngredientType OrderFoodType
+    {
+        get
+        {
+            return _orderFoodType;
+        }
+    }
+
+    private void Awake()
+    {
+        SpriteRenderer_Reaction.enabled = false;
+    }
 
     private void Update()
     {
@@ -79,7 +87,7 @@ public class Customer : MonoBehaviour, IInteractable
         _rewardScore = customerData.RewardScore;
 
         SetRandomOrder();
-        
+
         CustomerType customerType = customerData.GetCustomerType();
 
         switch (customerType)
@@ -94,6 +102,7 @@ public class Customer : MonoBehaviour, IInteractable
         }
 
         RuntimeAnimatorController controller = ResourceManager.Inst.LoadAnimatorController(_customerData.AnimatorControllerPath);
+
         CustomerView.SetAnimatorController(controller);
     }
 
@@ -105,8 +114,11 @@ public class Customer : MonoBehaviour, IInteractable
         _onExitCompleted = onExitCompleted;
 
         _customerState = CustomerState.MoveToWaitLine;
+        _currentWaitTime = _waitTime;
+        _lastMoveDirection = Vector2.down;
 
-        CustomerView.PlayAnimation(CustomerAnimAction.Walk);
+        CustomerView.SetMove(true);
+        CustomerView.SetDirection(_lastMoveDirection);
     }
 
     public void Interact(PlayerController playerController)
@@ -125,11 +137,26 @@ public class Customer : MonoBehaviour, IInteractable
 
         if (playerController.CurrentIngredientType != _orderFoodType)
         {
+            ShowReaction(Sprite_Wrong);
+
             Debug.Log($"잘못된 음식입니다. 주문 : {_orderFoodType}");
             return;
         }
 
         ServeFood(playerController);
+    }
+
+    public void ClearRuntime()
+    {
+        GameManager.Inst.RemoveCustomerOrder(this);
+
+        if (_orderBubbleUI == null)
+        {
+            return;
+        }
+
+        Destroy(_orderBubbleUI.gameObject);
+        _orderBubbleUI = null;
     }
 
     private void MoveToWaitLine()
@@ -138,6 +165,12 @@ public class Customer : MonoBehaviour, IInteractable
         {
             return;
         }
+
+        Vector3 moveDirection = (_waitPosition - transform.position).normalized;
+
+        RefreshMoveDirection(moveDirection);
+
+        CustomerView.SetMove(true);
 
         transform.position = Vector3.MoveTowards(transform.position, _waitPosition, _moveSpeed * Time.deltaTime);
 
@@ -151,7 +184,8 @@ public class Customer : MonoBehaviour, IInteractable
         _customerState = CustomerState.WaitOrder;
         _currentWaitTime = _waitTime;
 
-        CustomerView.PlayAnimation(CustomerAnimAction.Idle);
+        CustomerView.SetMove(false);
+        CustomerView.SetDirection(_lastMoveDirection);
 
         InitializeOrderBubble();
     }
@@ -162,6 +196,12 @@ public class Customer : MonoBehaviour, IInteractable
         {
             return;
         }
+
+        Vector3 moveDirection = (_exitPosition - transform.position).normalized;
+
+        RefreshMoveDirection(moveDirection);
+
+        CustomerView.SetMove(true);
 
         transform.position = Vector3.MoveTowards(transform.position, _exitPosition, _moveSpeed * Time.deltaTime);
 
@@ -194,7 +234,35 @@ public class Customer : MonoBehaviour, IInteractable
         }
 
         GameManager.Inst.AddFailedCustomer();
+
+        ShowReaction(Sprite_Timeout);
+
         StartExit();
+    }
+
+    private void StartExit()
+    {
+        _customerState = CustomerState.Exit;
+
+        Vector3 moveDirection = (_exitPosition - transform.position).normalized;
+
+        RefreshMoveDirection(moveDirection);
+
+        CustomerView.SetMove(true);
+
+        ClearRuntime();
+    }
+
+    private void RefreshMoveDirection(Vector3 moveDirection)
+    {
+        if (moveDirection == Vector3.zero)
+        {
+            return;
+        }
+
+        _lastMoveDirection = new Vector2(moveDirection.x, moveDirection.y).normalized;
+
+        CustomerView.SetDirection(_lastMoveDirection);
     }
 
     private void RefreshWaitGauge()
@@ -207,30 +275,15 @@ public class Customer : MonoBehaviour, IInteractable
         if (_waitTime <= 0)
         {
             _orderBubbleUI.SetWaitGauge(0f);
+            GameManager.Inst.RefreshCustomerWaitRatio(this, 0f);
             return;
         }
 
-        _orderBubbleUI.SetWaitGauge(_currentWaitTime / _waitTime);
-    }
+        float waitRatio = Mathf.Clamp01(_currentWaitTime / _waitTime);
 
-    private void StartExit()
-    {
-        _customerState = CustomerState.Exit;
+        _orderBubbleUI.SetWaitGauge(waitRatio);
 
-        CustomerView.PlayAnimation(CustomerAnimAction.Walk);
-
-        ClearRuntime();
-    }
-
-    public void ClearRuntime()
-    {
-        if (_orderBubbleUI == null)
-        {
-            return;
-        }
-
-        Destroy(_orderBubbleUI.gameObject);
-        _orderBubbleUI = null;
+        GameManager.Inst.RefreshCustomerWaitRatio(this, waitRatio);
     }
 
     private void SetRandomOrder()
@@ -262,6 +315,8 @@ public class Customer : MonoBehaviour, IInteractable
 
         _orderBubbleUI.transform.localScale = Vector3.one;
         _orderBubbleUI.Initialize(transform, _orderFoodType);
+
+        GameManager.Inst.AddCustomerOrder(this);
     }
 
     private void ServeFood(PlayerController playerController)
@@ -269,9 +324,14 @@ public class Customer : MonoBehaviour, IInteractable
         playerController.ClearIngredient();
 
         GameManager.Inst.AddScore(_rewardScore);
+
         CreateScorePopup();
+
         SoundManager.Inst.PlaySFX(_serveSuccessSFX);
+
         GameManager.Inst.AddCompletedOrder();
+
+        ShowReaction(Sprite_Success);
 
         StartExit();
     }
@@ -286,5 +346,64 @@ public class Customer : MonoBehaviour, IInteractable
         WorldTextPopup popup = Instantiate(ScorePopupPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
 
         popup.SetText($"+ {_rewardScore}");
+    }
+
+    private void ShowReaction(Sprite reactionSprite)
+    {
+        if (SpriteRenderer_Reaction == null)
+        {
+            return;
+        }
+
+        if (reactionSprite == null)
+        {
+            return;
+        }
+
+        SpriteRenderer_Reaction.sprite = reactionSprite;
+        SpriteRenderer_Reaction.enabled = true;
+
+        StartCoroutine(PlayReactionCoroutine());
+    }
+
+    private IEnumerator PlayReactionCoroutine()
+    {
+        Transform reactionTransform = SpriteRenderer_Reaction.transform;
+
+        Vector3 startScale = Vector3.one * 0.5f;
+        Vector3 endScale = Vector3.one * 1.2f;
+
+        float duration = 0.15f;
+        float elapsedTime = 0f;
+
+        reactionTransform.localScale = startScale;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float ratio = elapsedTime / duration;
+
+            reactionTransform.localScale = Vector3.Lerp(startScale, endScale, ratio);
+
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float ratio = elapsedTime / duration;
+
+            reactionTransform.localScale = Vector3.Lerp(endScale, Vector3.one, ratio);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        SpriteRenderer_Reaction.enabled = false;
     }
 }

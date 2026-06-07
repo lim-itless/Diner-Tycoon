@@ -128,6 +128,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerView
   _animator: {fileID: 6730056866339193952}
+  _spriteRenderer: {fileID: 334384272244434224}
+--- !u!1 &2943361892917259376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5711906399876322675}
+  - component: {fileID: 9025129742417568469}
+  m_Layer: 6
+  m_Name: ReactionBubble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5711906399876322675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943361892917259376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3485646907675605433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9025129742417568469
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943361892917259376}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 1522545489
+  m_SortingLayer: 4
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 1273627727107152391, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &4824805131917401477
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7885563465299619599}
+  - {fileID: 5711906399876322675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4491317142516977796
@@ -176,7 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dd1a59092041c44850742afab48750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YSort
-  SortingGroup_Target: {fileID: 0}
+  SortingGroup_Target: {fileID: 798212215992787156}
+  SortPivot: {fileID: 3485646907675605433}
   _sortingOffset: 0
 --- !u!114 &70034310668805876
 MonoBehaviour:
@@ -190,12 +284,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3ee3f40ab6d3749a33117df37b71f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Customer
-  BodyRenderer: {fileID: 334384272244434224}
-  CustomerRenderer: {fileID: 334384272244434224}
   CustomerView: {fileID: 891406238973613607}
   _orderFoodTypes: 040000000500000006000000
   OrderBubblePrefab: {fileID: 7559122015951505510, guid: b7552c7f3af90cc40a17f086085ad2f0, type: 3}
   ScorePopupPrefab: {fileID: 3623434605490907812, guid: d18d135d8ea597247b63a3296818e2c3, type: 3}
+  SpriteRenderer_Reaction: {fileID: 9025129742417568469}
+  Sprite_Success: {fileID: -7184225837295173951, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
+  Sprite_Wrong: {fileID: 5583990340439901969, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
+  Sprite_Timeout: {fileID: -4378477350760380897, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
   _serveSuccessSFX: {fileID: 8300000, guid: 5359d30c691dc7c468b5285697e7c3e0, type: 3}
 --- !u!70 &3549806454576019721
 CapsuleCollider2D:
@@ -244,6 +340,6 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: -834375215
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
