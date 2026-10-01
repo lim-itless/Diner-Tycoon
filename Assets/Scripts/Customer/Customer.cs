@@ -26,6 +26,16 @@ public class Customer : MonoBehaviour, IInteractable
 
     [SerializeField] private AudioClip _serveSuccessSFX;
 
+    [SerializeField] private Transform Customer_Anchor;
+
+    public Transform CustomerAnchorTransform
+    {
+        get
+        {
+            return Customer_Anchor;
+        }
+    }
+
     [NonSerialized]
     private CustomerData _customerData;
 
@@ -47,12 +57,25 @@ public class Customer : MonoBehaviour, IInteractable
 
     private Action<Customer> _onExitCompleted;
 
+    public InteractableType InteractableType
+    {
+        get
+        {
+            return InteractableType.Customer;
+        }
+    }
+
     public IngredientType OrderFoodType
     {
         get
         {
             return _orderFoodType;
         }
+    }
+
+    public void SetOrderFoodType(IngredientType orderFoodType)
+    {
+        _orderFoodType = orderFoodType;
     }
 
     private void Awake()
@@ -125,13 +148,13 @@ public class Customer : MonoBehaviour, IInteractable
     {
         if (_customerState != CustomerState.WaitOrder)
         {
-            Debug.Log("아직 대기열에 도착하지 않았습니다.");
+            Debug.Log("손님이 아직 자리에 도착하지 않음.");
             return;
         }
 
         if (playerController.IsCarry == false)
         {
-            Debug.Log("손님에게 줄 음식이 없습니다.");
+            Debug.Log("손님에게 줄 음식이 없음.");
             return;
         }
 
@@ -220,6 +243,11 @@ public class Customer : MonoBehaviour, IInteractable
     private void HandleWaitTimer()
     {
         if (_customerState != CustomerState.WaitOrder)
+        {
+            return;
+        }
+
+        if (SaveManager.Inst.SaveData.IsTutorialCompleted == false)
         {
             return;
         }

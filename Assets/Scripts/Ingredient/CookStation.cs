@@ -19,6 +19,14 @@ public class CookStation : MonoBehaviour, IInteractable
     private GameObject _currentFoodObject;
     private const int MAX_INGREDIENT_COUNT = 4;
 
+    public InteractableType InteractableType
+    {
+        get
+        {
+            return InteractableType.CookStation;
+        }
+    }
+
     private void RefreshFoodObject()
     {
         if (_currentFoodObject != null)

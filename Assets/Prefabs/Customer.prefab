@@ -129,6 +129,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerView
   _animator: {fileID: 6730056866339193952}
   _spriteRenderer: {fileID: 334384272244434224}
+--- !u!1 &1856643522099998386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8659597134770809782}
+  m_Layer: 6
+  m_Name: Customer_Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8659597134770809782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856643522099998386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3485646907675605433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2943361892917259376
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +286,7 @@ Transform:
   m_Children:
   - {fileID: 7885563465299619599}
   - {fileID: 5711906399876322675}
+  - {fileID: 8659597134770809782}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4491317142516977796
@@ -293,6 +325,7 @@ MonoBehaviour:
   Sprite_Wrong: {fileID: 5583990340439901969, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
   Sprite_Timeout: {fileID: -4378477350760380897, guid: 62ebe47712893f146b843c20f852bd33, type: 3}
   _serveSuccessSFX: {fileID: 8300000, guid: 5359d30c691dc7c468b5285697e7c3e0, type: 3}
+  Customer_Anchor: {fileID: 8659597134770809782}
 --- !u!70 &3549806454576019721
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

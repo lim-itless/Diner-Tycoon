@@ -168,7 +168,22 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (TutorialManager.Inst != null)
+        {
+            bool isAllowed = TutorialManager.Inst.IsInteractableAllowed(interactable);
+
+            if (isAllowed == false)
+            {
+                return;
+            }
+        }
+
         interactable.Interact(this);
+
+        if (TutorialManager.Inst != null)
+        {
+            TutorialManager.Inst.NotifyInteractSuccess(interactable.InteractableType);
+        }
     }
 
     public void CarryIngredient(IngredientType ingredientType)

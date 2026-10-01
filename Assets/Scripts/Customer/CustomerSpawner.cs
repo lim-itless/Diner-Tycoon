@@ -11,6 +11,9 @@ public class CustomerSpawner : MonoBehaviour
 
     [SerializeField] private float _spawnTerm = 1f;
 
+    [SerializeField] private string _tutorialCustomerId = "Customer_Normal_01";
+    [SerializeField] private IngredientType _tutorialOrderFoodType = IngredientType.ClamChowder;
+
     private Customer[] _customers;
     private bool _isSpawning;
 
@@ -48,6 +51,65 @@ public class CustomerSpawner : MonoBehaviour
         _isSpawning = false;
     }
 
+    public void SpawnTutorialCustomer()
+    {
+        ClearCustomers();
+
+        if (WaitSpots == null || WaitSpots.Length == 0)
+        {
+            return;
+        }
+
+        CustomerData customerData = GameDataManager.Inst.GetCustomerData(_tutorialCustomerId);
+
+        if (customerData == null)
+        {
+            return;
+        }
+
+        Customer customer = CreateCustomer();
+
+        if (customer == null)
+        {
+            return;
+        }
+
+        customer.InitializeData(customerData);
+        customer.SetOrderFoodType(_tutorialOrderFoodType);
+
+        _customers[0] = customer;
+
+        customer.Initialize(OrderBubble_Layout, WaitSpots[0].position, EntranceSpot.position, OnCustomerExitCompleted);
+
+        TutorialManager.Inst.SetCustomerTarget(customer.CustomerAnchorTransform);
+
+        GameManager.Inst.AddVisitCustomer();
+    }
+
+    private Customer CreateCustomer()
+    {
+        int instanceId = GameObjectManager.Inst.CreateObject(CustomerPrefab, EntranceSpot.position, Quaternion.identity);
+
+        GameObject customerObject = GameObjectManager.Inst.GetObject(instanceId);
+
+        if (customerObject == null)
+        {
+            return null;
+        }
+
+        customerObject.transform.SetParent(CustomerGroup);
+
+        Customer customer = customerObject.GetComponent<Customer>();
+
+        if (customer == null)
+        {
+            GameObjectManager.Inst.RemoveObject(customerObject);
+            return null;
+        }
+
+        return customer;
+    }
+
     private void SpawnCustomer(int waitIndex)
     {
         if (IsValidWaitIndex(waitIndex) == false)
@@ -62,18 +124,7 @@ public class CustomerSpawner : MonoBehaviour
             return;
         }
 
-        int instanceId = GameObjectManager.Inst.CreateObject(CustomerPrefab, EntranceSpot.position, Quaternion.identity);
-
-        GameObject customerObject = GameObjectManager.Inst.GetObject(instanceId);
-
-        if (customerObject == null)
-        {
-            return;
-        }
-
-        customerObject.transform.SetParent(CustomerGroup);
-
-        Customer customer = customerObject.GetComponent<Customer>();
+        Customer customer = CreateCustomer();
 
         if (customer == null)
         {

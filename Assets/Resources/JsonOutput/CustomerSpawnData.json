@@ -1,10 +1,12 @@
-[
+﻿[
   {
     "CustomerId": "Customer_Normal_01",
-    "SpawnWeight": 80
+    "SpawnWeight": 80,
+    "StartDay": 0
   },
   {
     "CustomerId": "Customer_VIP_01",
-    "SpawnWeight": 20
+    "SpawnWeight": 20,
+    "StartDay": 2
   }
 ]

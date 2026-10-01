@@ -43,6 +43,7 @@ public class CustomerSpawnData : GameDataBase
 {
     public string CustomerId;
     public int SpawnWeight;
+    public int StartDay;
 }
 
 [Serializable]

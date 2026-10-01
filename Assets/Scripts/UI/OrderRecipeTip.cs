@@ -6,8 +6,6 @@ public class OrderRecipeTip : UIBase
 {
     [SerializeField] private Image[] Image_IngredientIcons;
 
-
-
     public void Open(List<string> ingredientNames, Vector3 position)
     {
         transform.position = position;

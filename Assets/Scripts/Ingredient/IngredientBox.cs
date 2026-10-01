@@ -5,6 +5,14 @@ public class IngredientBox : MonoBehaviour, IInteractable
     [SerializeField] private IngredientType _ingredientType;
     [SerializeField] private AudioClip _pickupSFX;
 
+    public InteractableType InteractableType
+    {
+        get
+        {
+            return InteractableType.IngredientBox;
+        }
+    }
+
     public void Interact(PlayerController playerController)
     {
         playerController.CarryIngredient(_ingredientType);

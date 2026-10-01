@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
     public bool IsGamePlaying { get; private set; }
     public bool IsGameEnd { get; private set; }
 
+    private bool IsTutorialDay
+    {
+        get
+        {
+            return SaveManager.Inst.SaveData.IsTutorialCompleted == false;
+        }
+    }
+
     private void Awake()
     {
         if (Inst != null)
@@ -57,7 +65,44 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Inst.PlayMainBGM();
 
+        UIManager.Inst.OpenUI<DayStartUI>();
+    }
+
+    public void BeginGamePlay()
+    {
+        if (IsTutorialDay == true)
+        {
+            StartTutorialDay();
+            return;
+        }
+
         CustomerSpawner.BeginSpawnCustomers();
+    }
+
+    private void StartTutorialDay()
+    {
+        CurrentTime = 0f;
+        _lastTime = 0;
+
+        OnTimeChanged?.Invoke(_lastTime);
+
+        CustomerSpawner.SpawnTutorialCustomer();
+
+        TutorialManager.Inst.StartTutorial();
+    }
+
+    private void CompleteTutorialDay()
+    {
+        IsGameEnd = true;
+        IsGamePlaying = false;
+
+        ClearDayRuntime();
+
+        SaveManager.Inst.SaveData.IsTutorialCompleted = true;
+        SaveManager.Inst.SaveData.CurrentDay = 1;
+        SaveManager.Inst.SaveGame();
+
+        UIManager.Inst.OpenUI<TutorialCompleteUI>();
     }
 
     private void HandleGameTimer()
@@ -68,6 +113,11 @@ public class GameManager : MonoBehaviour
         }
 
         if (IsGameEnd == true)
+        {
+            return;
+        }
+
+        if (IsTutorialDay == true)
         {
             return;
         }
@@ -126,6 +176,11 @@ public class GameManager : MonoBehaviour
     public void AddCompletedOrder()
     {
         GameResultModel.CompletedOrderCount++;
+
+        if (IsTutorialDay == true)
+        {
+            CompleteTutorialDay();
+        }
     }
 
     public void AddFailedCustomer()

@@ -67,7 +67,7 @@ public class GameDataManager : MonoBehaviour
 
         if (textAsset == null)
         {
-            Debug.LogError("CustomerSpawnData 못 찾음");
+            Debug.LogError("CustomerSpawnData 못 찾음.");
             return;
         }
         
@@ -77,7 +77,7 @@ public class GameDataManager : MonoBehaviour
 
         if (dataList == null || dataList.CustomerSpawnDatas == null)
         {
-            Debug.LogError("CustomerSpawnData Json 파싱 실패");
+            Debug.LogError("CustomerSpawnData Json 파싱 실패.");
             return;
         }
 
@@ -93,7 +93,7 @@ public class GameDataManager : MonoBehaviour
 
         if (textAsset == null)
         {
-            Debug.LogError("RecipeData Json 못 찾음!");
+            Debug.LogError("RecipeData Json 못 찾음.");
             return;
         }
 
@@ -103,7 +103,7 @@ public class GameDataManager : MonoBehaviour
 
         if (dataList == null || dataList.RecipeDatas == null)
         {
-            Debug.LogError("RecipeData Json 파싱 실패");
+            Debug.LogError("RecipeData Json 파싱 실패.");
             return;
         }
 
@@ -115,13 +115,13 @@ public class GameDataManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(id) == true)
         {
-            Debug.LogWarning("Customer Id가 비어있습니다.");
+            Debug.LogWarning("Customer Id가 비어있음.");
             return null;
         }
 
         if (_customerDataDictionary.ContainsKey(id) == false)
         {
-            Debug.LogWarning($"{id} CustomerData가 없습니다.");
+            Debug.LogWarning($"{id} CustomerData가 없음.");
             return null;
         }
 
@@ -132,9 +132,11 @@ public class GameDataManager : MonoBehaviour
     {
         if (_customerSpawnDatas.Count == 0)
         {
-            Debug.LogWarning("CustomerSpawnData가 비어있습니다.");
+            Debug.LogWarning("CustomerSpawnData 없음.");
             return null;
         }
+
+        int currentDay = SaveManager.Inst.SaveData.CurrentDay;
 
         int totalWeight = 0;
 
@@ -147,26 +149,34 @@ public class GameDataManager : MonoBehaviour
                 continue;
             }
 
+            if (spawnData.StartDay > currentDay)
+            {
+                continue;
+            }
+
             totalWeight += spawnData.SpawnWeight;
         }
 
         if (totalWeight <= 0)
         {
-            Debug.LogWarning("CustomerSpawnData Weight 합계가 0 이하입니다.");
+            Debug.LogWarning("등장 할 수 있는 CustomerSpawnData 없음.");
             return null;
         }
 
-        int randomValue =
-            UnityEngine.Random.Range(0, totalWeight);
+        int randomValue = UnityEngine.Random.Range(0, totalWeight);
 
         int currentWeight = 0;
 
         for (int i = 0; i < _customerSpawnDatas.Count; i++)
         {
-            CustomerSpawnData spawnData =
-                _customerSpawnDatas[i];
+            CustomerSpawnData spawnData = _customerSpawnDatas[i];
 
             if (spawnData == null)
+            {
+                continue;
+            }
+
+            if (spawnData.StartDay > currentDay)
             {
                 continue;
             }
@@ -175,12 +185,11 @@ public class GameDataManager : MonoBehaviour
 
             if (randomValue < currentWeight)
             {
-                return GetCustomerData(
-                    spawnData.CustomerId
-                );
+                return GetCustomerData(spawnData.CustomerId);
             }
         }
 
+        Debug.LogWarning("CustomerData 랜덤 뽑기 실패");
         return null;
     }
 

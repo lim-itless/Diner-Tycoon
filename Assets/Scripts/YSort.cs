@@ -26,7 +26,6 @@ public class YSort : MonoBehaviour
             targetTransform = transform;
         }
 
-        SortingGroup_Target.sortingOrder =
-            Mathf.RoundToInt(-targetTransform.position.y * 100f) + _sortingOffset;
+        SortingGroup_Target.sortingOrder = Mathf.RoundToInt(-targetTransform.position.y * 100f) + _sortingOffset;
     }
 }
